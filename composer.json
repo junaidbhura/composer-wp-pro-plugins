@@ -1,0 +1,23 @@
+{
+  "name": "junaidbhura/composer-wp-pro-plugins",
+  "type": "composer-plugin",
+  "version": "0.1",
+  "require": {
+      "vlucas/phpdotenv": "^2.4",
+      "composer-plugin-api": "^1.1"
+  },
+  "authors": [
+      {
+          "name": "Junaid Bhura",
+          "email": "info@junaidbhura.com"
+      }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Junaidbhura\\Composer\\WPProPlugins\\": ""
+    }
+  },
+  "extra": {
+    "class": "Junaidbhura\\Composer\\WPProPlugins\\Installer"
+  }
+}
