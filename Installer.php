@@ -77,13 +77,22 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 	public function getDownloadUrl( PackageEvent $event ) {
 		$this->downloadUrl = '';
 		$package           = $this->getPackageFromOperation( $event->getOperation() );
+		$plugin            = false;
 
 		switch ( $package->getName() ) {
+
 			case 'junaidbhura/advanced-custom-fields-pro':
-				$acf = new Plugins\AcfPro( $package->getPrettyVersion() );
-				$this->downloadUrl = $acf->getDownloadUrl();
-				die($this->downloadUrl);
+				$plugin = new Plugins\AcfPro( $package->getPrettyVersion() );
 				break;
+
+			case 'junaidbhura/polylang-pro':
+				$plugin = new Plugins\PolylangPro( $package->getPrettyVersion() );
+				break;
+
+		}
+
+		if ( ! empty( $plugin ) ) {
+			$this->downloadUrl = $plugin->getDownloadUrl();
 		}
 	}
 
