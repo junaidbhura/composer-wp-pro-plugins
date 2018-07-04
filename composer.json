@@ -1,7 +1,7 @@
 {
   "name": "junaidbhura/composer-wp-pro-plugins",
   "type": "composer-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "require": {
       "vlucas/phpdotenv": "^2.4",
       "composer-plugin-api": "^1.1"
@@ -15,7 +15,7 @@
   "autoload": {
     "psr-4": {
       "Junaidbhura\\Composer\\WPProPlugins\\": "",
-      "Junaidbhura\\Composer\\WPProPlugins\\Plugins": "plugins"
+      "Junaidbhura\\Composer\\WPProPlugins\\Plugins\\": "plugins"
     }
   },
   "extra": {
