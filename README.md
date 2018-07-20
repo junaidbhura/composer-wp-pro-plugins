@@ -88,6 +88,8 @@ Add the following to your composer.json file:
 ],
 "require": {
   "junaidbhura/advanced-custom-fields-pro": "*",
+  "junaidbhura/gravityforms": "*",
+  "junaidbhura/gravityformspolls": "*",
   "junaidbhura/polylang-pro": "*"
 },
 ```
