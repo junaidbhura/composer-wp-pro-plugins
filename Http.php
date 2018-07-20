@@ -25,11 +25,13 @@ class Http {
 		curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, 1 );
 		curl_setopt( $curl_handle, CURLOPT_FOLLOWLOCATION, true );
 		curl_setopt( $curl_handle, CURLOPT_CUSTOMREQUEST, 'POST' );
-		curl_setopt( $curl_handle, CURLOPT_POSTFIELDS, http_build_query( $args ) );
-		$api_response = curl_exec( $curl_handle );
+		if ( ! empty( $args ) ) {
+			curl_setopt( $curl_handle, CURLOPT_POSTFIELDS, http_build_query( $args ) );
+		}
+		$response = curl_exec( $curl_handle );
 		curl_close( $curl_handle );
 
-		return json_decode( $api_response, true );
+		return $response;
 	}
 
 }

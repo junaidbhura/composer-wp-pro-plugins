@@ -36,14 +36,14 @@ class PolylangPro {
 	 * @return string
 	 */
 	public function getDownloadUrl() {
-		$http = new Http();
-		$response = $http->post( 'https://polylang.pro', array(
+		$http     = new Http();
+		$response = json_decode( $http->post( 'https://polylang.pro', array(
 			'edd_action' => 'get_version',
 			'license'    => getenv( 'POLYLANG_PRO_KEY' ),
 			'item_name'  => 'Polylang Pro',
 			'url'        => getenv( 'POLYLANG_PRO_URL' ),
 			'version'    => $this->version,
-		) );
+		) ), true );
 		if ( ! empty( $response['download_link'] ) ) {
 			return $response['download_link'];
 		}
