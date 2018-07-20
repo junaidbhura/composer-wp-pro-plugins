@@ -78,8 +78,9 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 		$this->downloadUrl = '';
 		$package           = $this->getPackageFromOperation( $event->getOperation() );
 		$plugin            = false;
+		$package_name      = $package->getName();
 
-		switch ( $package->getName() ) {
+		switch ( $package_name ) {
 
 			case 'junaidbhura/advanced-custom-fields-pro':
 				$plugin = new Plugins\AcfPro( $package->getPrettyVersion() );
@@ -88,6 +89,11 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 			case 'junaidbhura/polylang-pro':
 				$plugin = new Plugins\PolylangPro( $package->getPrettyVersion() );
 				break;
+
+			default:
+				if ( 0 === strpos( $package_name, 'junaidbhura/gravityforms' ) ) {
+					$plugin = new Plugins\GravityForms( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
+				}
 
 		}
 
