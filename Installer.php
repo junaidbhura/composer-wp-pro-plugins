@@ -90,9 +90,16 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 				$plugin = new Plugins\PolylangPro( $package->getPrettyVersion() );
 				break;
 
+			case 'junaidbhura/wp-all-import-pro':
+			case 'junaidbhura/wp-all-export-pro':
+				$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
+				break;
+
 			default:
 				if ( 0 === strpos( $package_name, 'junaidbhura/gravityforms' ) ) {
 					$plugin = new Plugins\GravityForms( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
+				} elseif ( 0 === strpos( $package_name, 'junaidbhura/wpai-' ) ) {
+					$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
 				}
 
 		}
