@@ -24,6 +24,8 @@ class Http {
 		curl_setopt( $curl_handle, CURLOPT_URL, $url );
 		curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, 1 );
 		curl_setopt( $curl_handle, CURLOPT_FOLLOWLOCATION, true );
+		curl_setopt( $curl_handle, CURLOPT_SSL_VERIFYPEER, 0 );
+		curl_setopt( $curl_handle, CURLOPT_SSL_VERIFYHOST, 0 );
 		curl_setopt( $curl_handle, CURLOPT_CUSTOMREQUEST, 'POST' );
 		if ( ! empty( $args ) ) {
 			curl_setopt( $curl_handle, CURLOPT_POSTFIELDS, http_build_query( $args ) );
