@@ -1,16 +1,16 @@
 {
-  "name": "junaidbhura/composer-wp-pro-plugins",
+  "name": "danielglans/composer-wp-pro-plugins",
   "type": "composer-plugin",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "require": {
-      "vlucas/phpdotenv": "^2.4",
-      "composer-plugin-api": "^1.1"
+    "vlucas/phpdotenv": "^3.0.0",
+    "composer-plugin-api": "^1.1"
   },
   "authors": [
-      {
-          "name": "Junaid Bhura",
-          "email": "info@junaidbhura.com"
-      }
+    {
+      "name": "Junaid Bhura",
+      "email": "info@junaidbhura.com"
+    }
   ],
   "autoload": {
     "psr-4": {

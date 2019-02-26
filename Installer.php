@@ -38,7 +38,7 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 		$this->io       = $io;
 
 		if ( file_exists( getcwd() . DIRECTORY_SEPARATOR . '.env' ) ) {
-			$dotenv = new Dotenv( getcwd() );
+			$dotenv = Dotenv::create( getcwd() );
 			$dotenv->load();
 		}
 	}
@@ -88,6 +88,10 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 
 			case 'junaidbhura/polylang-pro':
 				$plugin = new Plugins\PolylangPro( $package->getPrettyVersion() );
+				break;
+
+			case 'junaidbhura/polylang-wc':
+				$plugin = new Plugins\PolylangProWoo( $package->getPrettyVersion() );
 				break;
 
 			case 'junaidbhura/wp-all-import-pro':
