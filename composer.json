@@ -1,5 +1,5 @@
 {
-  "name": "danielglans/composer-wp-pro-plugins",
+  "name": "bechwebbkonsult/composer-wp-pro-plugins",
   "type": "composer-plugin",
   "version": "1.0.6",
   "require": {
