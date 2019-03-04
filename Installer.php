@@ -38,7 +38,7 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 		$this->io       = $io;
 
 		if ( file_exists( getcwd() . DIRECTORY_SEPARATOR . '.env' ) ) {
-			$dotenv = new Dotenv( getcwd() );
+			$dotenv = Dotenv::create( getcwd() );
 			$dotenv->load();
 		}
 	}
