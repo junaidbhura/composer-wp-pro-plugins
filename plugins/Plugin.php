@@ -47,7 +47,7 @@ class Plugin {
 	 * @return string;
 	 */
 	public function getConfigValue( string $key, string $envKey ) {
-		return $config[ $key ] ?? getenv( $envKey );
+		return $this->config[ $key ] ?? getenv( $envKey );
 	}
 
 }

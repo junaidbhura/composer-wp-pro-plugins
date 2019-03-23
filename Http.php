@@ -39,27 +39,23 @@ class Http {
 	/**
 	 * Get an EDD download URL.
 	 *
-	 * @param string $url      The URL of the plugin's EDD-powered website.
-	 * @param string $itemName The name of the plugin to be downloaded.
-	 * @param string $key      The valid license key.
-	 * @param string $version  The version to request.
-	 * @param string $siteUrl  The user's authorised website.
+	 * @param string $url        The URL of the plugin's EDD-powered website.
+	 * @param string $itemName   The name of the plugin to be downloaded.
+	 * @param string $licenseKey The valid license key.
+	 * @param string $version    The version to request.
+	 * @param string $siteUrl    The user's authorised website.
 	 *
 	 * @return string
 	 */
-	public function getEddUrl( string $url, string $itemName, string $key, string $version, string $siteUrl ) {
+	public function getEddUrl( string $url, string $itemName, string $licenseKey, string $version, string $siteUrl ) {
 		$response = json_decode( $this->post( $url, array(
 			'edd_action' => 'get_version',
 			'item_name'  => $itemName,
-			'license'    => $key,
+			'license'    => $licenseKey,
 			'version'    => $version,
 			'url'        => $siteUrl,
 		) ), true );
 
-		if ( empty( $response['download_link'] ) ) {
-			return '';
-		}
-
-		return $response['download_link'];
+		return $response['download_link'] ?? '';
 	}
 }
