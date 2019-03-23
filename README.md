@@ -59,10 +59,10 @@ Next, define the repositories you would like to install. You must add at least t
 Add the following to your composer.json file:
 
 ```json
-"repositories":[
+"repositories": [
   {
-    "type":"vcs",
-    "url":"https://github.com/junaidbhura/composer-wp-pro-plugins"
+    "type": "vcs",
+    "url": "https://github.com/junaidbhura/composer-wp-pro-plugins"
   },
   {
     "type": "package",
