@@ -94,6 +94,10 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 				$plugin = new Plugins\PolylangPro( $package->getPrettyVersion(), $this->config );
 				break;
 
+			case 'junaidbhura/searchwp':
+				$plugin = new Plugins\SearchWp( $package->getPrettyVersion(), $this->config );
+				break;
+
 			case 'junaidbhura/wp-all-import-pro':
 			case 'junaidbhura/wp-all-export-pro':
 				$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), $this->config, $this->getSlug( $package_name ) );
