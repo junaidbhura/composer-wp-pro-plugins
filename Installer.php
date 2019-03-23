@@ -37,7 +37,11 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 		$this->composer = $composer;
 		$this->io       = $io;
 
-		if ( file_exists( getcwd() . DIRECTORY_SEPARATOR . '.env' ) ) {
+		// Attempt to get the config.
+		$this->config = $this->composer->getConfig()->get('composer-wp-pro-plugins') ?? [];
+
+		// Load the .env file if the standard config does not exist.
+		if ( empty( $this->config ) && file_exists( getcwd() . DIRECTORY_SEPARATOR . '.env' ) ) {
 			$dotenv = Dotenv::create( getcwd() );
 			$dotenv->load();
 		}
@@ -83,23 +87,23 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 		switch ( $package_name ) {
 
 			case 'junaidbhura/advanced-custom-fields-pro':
-				$plugin = new Plugins\AcfPro( $package->getPrettyVersion() );
+				$plugin = new Plugins\AcfPro( $package->getPrettyVersion(), $this->config );
 				break;
 
 			case 'junaidbhura/polylang-pro':
-				$plugin = new Plugins\PolylangPro( $package->getPrettyVersion() );
+				$plugin = new Plugins\PolylangPro( $package->getPrettyVersion(), $this->config );
 				break;
 
 			case 'junaidbhura/wp-all-import-pro':
 			case 'junaidbhura/wp-all-export-pro':
-				$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
+				$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), $this->config, $this->getSlug( $package_name ) );
 				break;
 
 			default:
 				if ( 0 === strpos( $package_name, 'junaidbhura/gravityforms' ) ) {
-					$plugin = new Plugins\GravityForms( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
+					$plugin = new Plugins\GravityForms( $package->getPrettyVersion(), $this->config, $this->getSlug( $package_name ) );
 				} elseif ( 0 === strpos( $package_name, 'junaidbhura/wpai-' ) ) {
-					$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
+					$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), $this->config, $this->getSlug( $package_name ) );
 				}
 
 		}
@@ -107,6 +111,15 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 		if ( ! empty( $plugin ) ) {
 			$this->downloadUrl = $plugin->getDownloadUrl();
 		}
+	}
+
+	/**
+	 * Get a slug from a package name.
+	 *
+	 * @return string
+	 */
+	public function getSlug( string $package_name ) {
+		return str_replace( 'junaidbhura/', '', $package_name );
 	}
 
 	/**

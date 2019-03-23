@@ -12,7 +12,7 @@ use Junaidbhura\Composer\WPProPlugins\Http;
 /**
  * GravityForms class.
  */
-class GravityForms {
+class GravityForms extends Plugin implements PluginInterface {
 
 	/**
 	 * The version number of the plugin to download.
@@ -20,6 +20,13 @@ class GravityForms {
 	 * @var string Version number.
 	 */
 	protected $version = '';
+
+	/**
+	 * The composer-wp-pro-plugins config array for the Composer instance.
+	 *
+	 * @var array Config array.
+	 */
+	protected $config = [];
 
 	/**
 	 * The slug of which Gravity Forms plugin to download.
@@ -34,9 +41,8 @@ class GravityForms {
 	 * @param string $version
 	 * @param string $slug
 	 */
-	public function __construct( $version = '', $slug = 'gravityforms' ) {
-		$this->version = $version;
-		$this->slug    = $slug;
+	public function __construct( string $version, array $config, string $slug = 'gravityforms' ) {
+		parent::__construct( $version, $config, $slug );
 	}
 
 	/**
@@ -45,11 +51,15 @@ class GravityForms {
 	 * @return string
 	 */
 	public function getDownloadUrl() {
+		$key = $this->getConfigValue( 'gravity-forms-key', 'GRAVITY_FORMS_KEY' );
+
 		$http     = new Http();
-		$response = unserialize( $http->post( 'https://www.gravityhelp.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=' . $this->slug . '&key=' . getenv( 'GRAVITY_FORMS_KEY' ) ) );
+		$response = unserialize( $http->post( 'https://www.gravityhelp.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=' . $this->slug . '&key=' . $key ) );
+
 		if ( ! empty( $response['download_url_latest'] ) ) {
 			return str_replace( 'http://', 'https://', $response['download_url_latest'] );
 		}
+
 		return '';
 	}
 

@@ -12,7 +12,7 @@ use Junaidbhura\Composer\WPProPlugins\Http;
 /**
  * WpAiPro class.
  */
-class WpAiPro {
+class WpAiPro extends Plugin implements PluginInterface {
 
 	/**
 	 * The version number of the plugin to download.
@@ -20,6 +20,13 @@ class WpAiPro {
 	 * @var string Version number.
 	 */
 	protected $version = '';
+
+	/**
+	 * The composer-wp-pro-plugins config array for the Composer instance.
+	 *
+	 * @var array Config array.
+	 */
+	protected $config = [];
 
 	/**
 	 * The slug of which plugin to download.
@@ -34,9 +41,8 @@ class WpAiPro {
 	 * @param string $version
 	 * @param string $slug
 	 */
-	public function __construct( $version = '', $slug = 'wp-all-import-pro' ) {
-		$this->version = $version;
-		$this->slug    = $slug;
+	public function __construct( string $version, array $config, string $slug = 'wp-all-import-pro' ) {
+		parent::__construct( $version, $config, $slug );
 	}
 
 	/**
@@ -46,12 +52,12 @@ class WpAiPro {
 	 */
 	public function getDownloadUrl() {
 		if ( 'wp-all-export-pro' === $this->slug ) {
-			$license = getenv( 'WP_ALL_EXPORT_PRO_KEY' );
-			$url     = getenv( 'WP_ALL_EXPORT_PRO_URL' );
-			$name    = 'WP All Export';
+			$licenseKey = $this->getConfigValue( 'wp-all-export-pro-key', 'WP_ALL_EXPORT_PRO_KEY' );
+			$siteUrl    = $this->getConfigValue( 'wp-all-export-pro-url', 'WP_ALL_EXPORT_PRO_URL' );
+			$name       = 'WP All Export';
 		} else {
-			$license = getenv( 'WP_ALL_IMPORT_PRO_KEY' );
-			$url     = getenv( 'WP_ALL_IMPORT_PRO_URL' );
+			$licenseKey = $this->getConfigValue( 'wp-all-import-pro-key', 'WP_ALL_IMPORT_PRO_KEY' );
+			$siteUrl    = $this->getConfigValue( 'wp-all-import-pro-url', 'WP_ALL_IMPORT_PRO_URL' );
 
 			switch ( $this->slug ) {
 				case 'wpai-acf-add-on':
@@ -71,18 +77,7 @@ class WpAiPro {
 			}
 		}
 
-		$http     = new Http();
-		$response = json_decode( $http->post( 'https://www.wpallimport.com', array(
-			'edd_action' => 'get_version',
-			'license'    => $license,
-			'item_name'  => $name,
-			'url'        => $url,
-			'version'    => $this->version,
-		) ), true );
-		if ( ! empty( $response['download_link'] ) ) {
-			return $response['download_link'];
-		}
-		return '';
+		return $http->getEddUrl( 'https://www.wpallimport.com', $name, $licenseKey, $this->version, $siteUrl );
 	}
 
 }

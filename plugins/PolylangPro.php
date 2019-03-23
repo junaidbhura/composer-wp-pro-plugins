@@ -12,7 +12,7 @@ use Junaidbhura\Composer\WPProPlugins\Http;
 /**
  * PolylangPro class.
  */
-class PolylangPro {
+class PolylangPro extends Plugin implements PluginInterface {
 
 	/**
 	 * The version number of the plugin to download.
@@ -22,12 +22,27 @@ class PolylangPro {
 	protected $version = '';
 
 	/**
+	 * The composer-wp-pro-plugins config array for the Composer instance.
+	 *
+	 * @var array Config array.
+	 */
+	protected $config = [];
+
+	/**
+	 * The slug of which plugin to download.
+	 *
+	 * @var string Plugin slug.
+	 */
+	protected $slug = '';
+
+	/**
 	 * PolylangPro constructor.
 	 *
 	 * @param string $version
+	 * @param array $config
 	 */
-	public function __construct( $version = '' ) {
-		$this->version = $version;
+	public function __construct( string $version, array $config ) {
+		parent::__construct( $version, $config );
 	}
 
 	/**
@@ -36,18 +51,13 @@ class PolylangPro {
 	 * @return string
 	 */
 	public function getDownloadUrl() {
-		$http     = new Http();
-		$response = json_decode( $http->post( 'https://polylang.pro', array(
-			'edd_action' => 'get_version',
-			'license'    => getenv( 'POLYLANG_PRO_KEY' ),
-			'item_name'  => 'Polylang Pro',
-			'url'        => getenv( 'POLYLANG_PRO_URL' ),
-			'version'    => $this->version,
-		) ), true );
-		if ( ! empty( $response['download_link'] ) ) {
-			return $response['download_link'];
-		}
-		return '';
+		// Get the config settings.
+		$licenseKey = $this->getConfigValue( 'polylang-pro-key', 'POLYLANG_PRO_KEY' );
+		$siteUrl    = $this->getConfigValue( 'polylang-pro-url', 'POLYLANG_PRO_URL' );
+
+		$http = new Http();
+
+		return $http->getEddUrl( 'https://polylang.pro', 'Polylang Pro', $licenseKey, $this->version, $siteUrl );
 	}
 
 }
