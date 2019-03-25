@@ -1,5 +1,7 @@
 # Composer Installer for Pro WordPress Plugins.
 
+**Important Note: Most EDD plugins, and Gravity Forms only allow getting the latest versions of their plugins, even if you specifically ask for a version.**
+
 Currently supports:
 
 1. Advanced Custom Fields Pro
