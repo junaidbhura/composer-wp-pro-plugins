@@ -1,24 +1,27 @@
 {
   "name": "junaidbhura/composer-wp-pro-plugins",
   "type": "composer-plugin",
+  "description": "Composer installer for Pro WordPress plugins.",
   "version": "1.0.7",
-  "require": {
-      "vlucas/phpdotenv": "^3.0",
-      "composer-plugin-api": "^1.1"
-  },
   "authors": [
-      {
-          "name": "Junaid Bhura",
-          "email": "info@junaidbhura.com"
-      }
-  ],
-  "autoload": {
-    "psr-4": {
-      "Junaidbhura\\Composer\\WPProPlugins\\": "",
-      "Junaidbhura\\Composer\\WPProPlugins\\Plugins\\": "plugins"
+    {
+      "name": "Junaid Bhura",
+      "email": "info@junaidbhura.com"
     }
+  ],
+  "require": {
+    "composer-plugin-api": "^1.1",
+    "vlucas/phpdotenv": "^3.0"
+  },
+  "require-dev": {
+    "phpstan/phpstan-shim": "^0.11.0"
   },
   "extra": {
     "class": "Junaidbhura\\Composer\\WPProPlugins\\Installer"
+  },
+  "autoload": {
+    "psr-4": {
+      "Junaidbhura\\Composer\\WPProPlugins\\": "src"
+    }
   }
 }

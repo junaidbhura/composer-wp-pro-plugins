@@ -10,6 +10,7 @@ namespace Junaidbhura\Composer\WPProPlugins;
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\DependencyResolver\Operation\OperationInterface;
+use Composer\DependencyResolver\Operation\UpdateOperation;
 use Composer\IO\IOInterface;
 use Composer\Plugin\PluginInterface;
 use Composer\Installer\PackageEvent;
@@ -63,7 +64,7 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 	 * @return mixed
 	 */
 	protected function getPackageFromOperation( OperationInterface $operation ) {
-		if ( 'update' === $operation->getJobType() ) {
+		if ( $operation instanceof UpdateOperation ) {
 			return $operation->getTargetPackage();
 		}
 		return $operation->getPackage();
