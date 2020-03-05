@@ -3,7 +3,7 @@
   "type": "composer-plugin",
   "version": "1.0.7",
   "require": {
-      "vlucas/phpdotenv": "^3.0",
+      "vlucas/phpdotenv": "^4.1",
       "composer-plugin-api": "^1.1"
   },
   "authors": [
