@@ -1,7 +1,7 @@
 {
   "name": "junaidbhura/composer-wp-pro-plugins",
   "type": "composer-plugin",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "require": {
       "vlucas/phpdotenv": "^4.1.0",
       "composer-plugin-api": "^1.1"
