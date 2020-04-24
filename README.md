@@ -29,10 +29,6 @@ Add the following to your composer.json file:
 ```json
 "repositories":[
   {
-    "type":"vcs",
-    "url":"https://github.com/junaidbhura/composer-wp-pro-plugins"
-  },
-  {
     "type": "package",
     "package": {
       "name": "junaidbhura/advanced-custom-fields-pro",
