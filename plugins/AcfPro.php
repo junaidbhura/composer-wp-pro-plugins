@@ -20,12 +20,20 @@ class AcfPro {
 	protected $version = '';
 
 	/**
+	 * The slug of which ACF plugin to download.
+	 *
+	 * @var string Plugin slug.
+	 */
+	protected $slug = '';
+
+	/**
 	 * AcfPro constructor.
 	 *
 	 * @param string $version
 	 */
-	public function __construct( $version = '' ) {
+	public function __construct( $version = '', $slug = 'pro' ) {
 		$this->version = $version;
+		$this->slug    = $slug;
 	}
 
 	/**
@@ -34,7 +42,7 @@ class AcfPro {
 	 * @return string
 	 */
 	public function getDownloadUrl() {
-		return 'https://connect.advancedcustomfields.com/v2/plugins/download?p=pro&k=' . getenv( 'ACF_PRO_KEY' ) . '&t=' . $this->version;
+		return 'https://connect.advancedcustomfields.com/v2/plugins/download?p=' . $this->slug . '&k=' . getenv( 'ACF_PRO_KEY' ) . '&t=' . $this->version;
 	}
 
 }

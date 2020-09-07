@@ -96,7 +96,9 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 				break;
 
 			default:
-				if ( 0 === strpos( $package_name, 'junaidbhura/gravityforms' ) ) {
+				if ( 0 === strpos( $package_name, 'junaidbhura/advanced-custom-fields-' ) ) {
+					$plugin = new Plugins\AcfPro( $package->getPrettyVersion(), str_replace( 'junaidbhura/advanced-custom-fields-', '', $package_name ) );
+				} elseif ( 0 === strpos( $package_name, 'junaidbhura/gravityforms' ) ) {
 					$plugin = new Plugins\GravityForms( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
 				} elseif ( 0 === strpos( $package_name, 'junaidbhura/wpai-' ) ) {
 					$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
