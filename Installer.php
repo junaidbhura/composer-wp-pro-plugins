@@ -52,7 +52,7 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 		return array(
 			PackageEvents::PRE_PACKAGE_INSTALL => 'getDownloadUrl',
 			PackageEvents::PRE_PACKAGE_UPDATE => 'getDownloadUrl',
-			PluginEvents::PRE_FILE_DOWNLOAD => 'onPreFileDownload',
+			PluginEvents::PRE_FILE_DOWNLOAD => array( 'onPreFileDownload', -1 ),
 		);
 	}
 
