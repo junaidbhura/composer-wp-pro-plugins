@@ -1,7 +1,8 @@
 {
   "name": "junaidbhura/composer-wp-pro-plugins",
   "type": "composer-plugin",
-  "version": "1.0.8",
+  "version": "1.0.9",
+  "license": "MIT",
   "require": {
       "vlucas/phpdotenv": "^4.1.0",
       "composer-plugin-api": "^1.1"
