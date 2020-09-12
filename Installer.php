@@ -106,12 +106,13 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 
 		if ( ! empty( $plugin ) ) {
 			$this->downloadUrl = $plugin->getDownloadUrl();
-			$package_url       = $package->getDistUrl();
-			$package_key       = sha1( $package->getUniqueName() );
 
+			// Set a unique Dist URL to prevent caching.
+			$package_url = $package->getDistUrl();
+			$package_key = sha1( $package->getUniqueName() );
 			if ( false === strpos( $package_url, $package_key ) ) {
-                $package->setDistUrl( $package_url . '#' . $package_key );
-            }
+				$package->setDistUrl( $package_url . '#' . $package_key );
+			}
 		}
 	}
 
