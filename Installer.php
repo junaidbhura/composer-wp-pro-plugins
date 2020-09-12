@@ -79,40 +79,38 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 		$package           = $this->getPackageFromOperation( $event->getOperation() );
 		$plugin            = false;
 		$package_name      = $package->getName();
-		$package_version   = $package->getPrettyVersion();
 
 		switch ( $package_name ) {
 
 			case 'junaidbhura/advanced-custom-fields-pro':
-				$plugin = new Plugins\AcfPro( $package_version );
+				$plugin = new Plugins\AcfPro( $package->getPrettyVersion() );
 				break;
 
 			case 'junaidbhura/polylang-pro':
-				$plugin = new Plugins\PolylangPro( $package_version );
+				$plugin = new Plugins\PolylangPro( $package->getPrettyVersion() );
 				break;
 
 			case 'junaidbhura/wp-all-import-pro':
 			case 'junaidbhura/wp-all-export-pro':
-				$plugin = new Plugins\WpAiPro( $package_version, str_replace( 'junaidbhura/', '', $package_name ) );
+				$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
 				break;
 
 			default:
 				if ( 0 === strpos( $package_name, 'junaidbhura/gravityforms' ) ) {
-					$plugin = new Plugins\GravityForms( $package_version, str_replace( 'junaidbhura/', '', $package_name ) );
+					$plugin = new Plugins\GravityForms( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
 				} elseif ( 0 === strpos( $package_name, 'junaidbhura/wpai-' ) ) {
-					$plugin = new Plugins\WpAiPro( $package_version, str_replace( 'junaidbhura/', '', $package_name ) );
+					$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
 				}
 
 		}
 
 		if ( ! empty( $plugin ) ) {
 			$this->downloadUrl = $plugin->getDownloadUrl();
+			$package_url       = $package->getDistUrl();
+			$package_key       = sha1( $package->getUniqueName() );
 
-			$package_url = $package->getDistUrl();
-			if ( false !== strpos( $package_url, '%version%' ) ) {
-				$package->setDistUrl( str_replace( '%version%', $package_version, $package_url ) );
-			} elseif ( false === strpos( $package_url, $package_version ) ) {
-                $package->setDistUrl( $package_url . '#v' . $package_version );
+			if ( false === strpos( $package_url, $package_key ) ) {
+                $package->setDistUrl( $package_url . '#' . $package_key );
             }
 		}
 	}
