@@ -3,14 +3,14 @@
   "type": "composer-plugin",
   "license": "MIT",
   "require": {
-      "vlucas/phpdotenv": "^4.1.0",
-      "composer-plugin-api": "^1.1"
+    "vlucas/phpdotenv": "^4.1.0",
+    "composer-plugin-api": "^1.1"
   },
   "authors": [
-      {
-          "name": "Junaid Bhura",
-          "email": "info@junaidbhura.com"
-      }
+    {
+      "name": "Junaid Bhura",
+      "email": "info@junaidbhura.com"
+    }
   ],
   "autoload": {
     "psr-4": {
