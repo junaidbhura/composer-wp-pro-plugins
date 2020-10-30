@@ -116,15 +116,13 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 			$package = $operation->getPackage();
 		}
 
-		if ( $this->isPackageSupported( $package ) ) {
-			$download_url = $this->getDownloadUrl( $package );
-			if ( $download_url ) {
-				$this->downloadUrl = $download_url;
+		$download_url = $this->getDownloadUrl( $package );
+		if ( ! empty( $download_url ) ) {
+			$this->downloadUrl = $download_url;
 
-				$dist_url     = $package->getDistUrl();
-				$filtered_url = $this->filterDistUrl( $dist_url, $package );
-				$package->setDistUrl( $filtered_url );
-			}
+			$dist_url     = $package->getDistUrl();
+			$filtered_url = $this->filterDistUrl( $dist_url, $package );
+			$package->setDistUrl( $filtered_url );
 		}
 	}
 
