@@ -9,13 +9,14 @@ namespace Junaidbhura\Composer\WPProPlugins;
 
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
-use Composer\DependencyResolver\Operation\OperationInterface;
 use Composer\IO\IOInterface;
-use Composer\Plugin\PluginInterface;
 use Composer\Installer\PackageEvent;
 use Composer\Installer\PackageEvents;
+use Composer\Package\PackageInterface;
 use Composer\Plugin\PluginEvents;
+use Composer\Plugin\PluginInterface;
 use Composer\Plugin\PreFileDownloadEvent;
+use Composer\Plugin\PrePoolCreateEvent;
 use Dotenv\Dotenv;
 
 /**
@@ -23,8 +24,19 @@ use Dotenv\Dotenv;
  */
 class Installer implements PluginInterface, EventSubscriberInterface {
 
+	/**
+	 * @var Composer
+	 */
 	protected $composer;
+
+	/**
+	 * @var IOInterface
+	 */
 	protected $io;
+
+	/**
+	 * @var string|null
+	 */
 	protected $downloadUrl;
 
 	/**
@@ -44,44 +56,163 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 	}
 
 	/**
+	 * Deactivate plugin.
+	 *
+	 * @param Composer    $composer
+	 * @param IOInterface $io
+	 */
+	public function deactivate( Composer $composer, IOInterface $io ) {
+		$this->composer = null;
+		$this->io       = null;
+	}
+
+	/**
+	 * Uninstall plugin.
+	 *
+	 * @param Composer    $composer
+	 * @param IOInterface $io
+	 */
+	public function uninstall( Composer $composer, IOInterface $io ) {
+		// no need to uninstall anything
+	}
+
+	/**
 	 * Set subscribed events.
 	 *
 	 * @return array
 	 */
 	public static function getSubscribedEvents() {
-		return array(
-			PackageEvents::PRE_PACKAGE_INSTALL => 'getDownloadUrl',
-			PackageEvents::PRE_PACKAGE_UPDATE => 'getDownloadUrl',
-			PluginEvents::PRE_FILE_DOWNLOAD => array( 'onPreFileDownload', -1 ),
-		);
+
+		if ( version_compare( PluginInterface::PLUGIN_API_VERSION, '2.0.0', '<' ) ) {
+			return [
+				PackageEvents::PRE_PACKAGE_INSTALL => 'onPrePackageInstallOrUpdateInComposer1',
+				PackageEvents::PRE_PACKAGE_UPDATE  => 'onPrePackageInstallOrUpdateInComposer1',
+				PluginEvents::PRE_FILE_DOWNLOAD    => array( 'onPreFileDownloadInComposer1', -1 ),
+			];
+		}
+
+		return [
+			PluginEvents::PRE_FILE_DOWNLOAD => array( 'onPreFileDownloadInComposer2', -1 ),
+		];
 	}
 
 	/**
-	 * Get package from operation.
+	 * Prepare the dist URL of supported packages in Composer v1.
 	 *
-	 * @param OperationInterface $operation
-	 * @return mixed
+	 * In Composer v1, the {@see self::$downloadUrl} is used to track the
+	 * processed URL during the iteration of each install/update of a package.
+	 * This is necessary because the `PRE_FILE_DOWNLOAD` event does not receive
+	 * the package as a context.
+	 *
+	 * @param PackageEvent $event
 	 */
-	protected function getPackageFromOperation( OperationInterface $operation ) {
+	public function onPrePackageInstallOrUpdateInComposer1( PackageEvent $event ) {
+		$this->downloadUrl = null;
+
+		$operation = $event->getOperation();
 		if ( 'update' === $operation->getJobType() ) {
-			return $operation->getTargetPackage();
+			$package = $operation->getTargetPackage();
+		} else {
+			$package = $operation->getPackage();
 		}
-		return $operation->getPackage();
+
+		if ( $this->isPackageSupported( $package ) ) {
+			$download_url = $this->getDownloadUrl( $package );
+			if ( $download_url ) {
+				$this->downloadUrl = $download_url;
+
+				$dist_url     = $package->getDistUrl();
+				$filtered_url = $this->filterDistUrl( $dist_url, $package );
+				$package->setDistUrl( $filtered_url );
+			}
+		}
+	}
+
+	/**
+	 * Prepare the download URL in Composer v1.
+	 *
+	 * In Composer v1, packages are downloaded, installed/updated, sequentially.
+	 *
+	 * @param PreFileDownloadEvent $event
+	 */
+	public function onPreFileDownloadInComposer1( PreFileDownloadEvent $event ) {
+		if ( empty( $this->downloadUrl ) ) {
+			return;
+		}
+
+		$_remote_filesystem = $event->getRemoteFilesystem();
+		$remote_filesystem  = new RemoteFilesystem(
+			$this->downloadUrl,
+			$this->io,
+			$this->composer->getConfig(),
+			$_remote_filesystem->getOptions(),
+			$_remote_filesystem->isTlsDisabled()
+		);
+		$event->setRemoteFilesystem( $remote_filesystem );
+	}
+
+	/**
+	 * Prepare the download URL in Composer v2.
+	 *
+	 * In Composer v2, all packages get downloaded first,
+	 * then prepared, then installed/updated.
+	 *
+	 * @param PreFileDownloadEvent $event
+	 */
+	public function onPreFileDownloadInComposer2( PreFileDownloadEvent $event ) {
+		/**
+		 * @see https://github.com/composer/composer/pull/8975
+		 *     Bail early if this event is not for a package.
+		 */
+		if ( $event->getType() !== 'package' ) {
+			return;
+		}
+
+		$package       = $event->getContext();
+		$processed_url = $event->getProcessedUrl();
+		$download_url  = $this->getDownloadUrl( $package );
+
+		if ( $download_url ) {
+			$filtered_url = $this->filterDistUrl( $processed_url, $package );
+
+			$event->setProcessedUrl( $download_url );
+			$event->setCustomCacheKey( $filtered_url );
+			$package->setDistUrl( $filtered_url );
+		}
+	}
+
+	/**
+	 * Filter the dist URL for a given package.
+	 *
+	 * The filtered dist URL is stored inside `composer.lock` and is used
+	 * to generate the cache key for the requested package version.
+	 *
+	 * @param string|null      $url
+	 * @param PackageInterface $package
+	 *
+	 * @return string|null The filtered dist URL.
+	 */
+	protected function filterDistUrl( $url, PackageInterface $package ) {
+		$package_key = sha1( $package->getUniqueName() );
+		if ( false === strpos( $url, $package_key ) ) {
+			$url .= '#' . $package_key;
+		}
+
+		return $url;
 	}
 
 	/**
 	 * Get download URL for our plugins.
 	 *
-	 * @param PackageEvent $event
+	 * @param PackageInterface $package
+	 *
+	 * @return ?string The plugin download URL.
 	 */
-	public function getDownloadUrl( PackageEvent $event ) {
-		$this->downloadUrl = '';
-		$package           = $this->getPackageFromOperation( $event->getOperation() );
-		$plugin            = false;
-		$package_name      = $package->getName();
+	protected function getDownloadUrl( PackageInterface $package ) {
+		$plugin       = null;
+		$package_name = $package->getName();
 
 		switch ( $package_name ) {
-
 			case 'junaidbhura/advanced-custom-fields-pro':
 				$plugin = new Plugins\AcfPro( $package->getPrettyVersion() );
 				break;
@@ -101,40 +232,13 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 				} elseif ( 0 === strpos( $package_name, 'junaidbhura/wpai-' ) ) {
 					$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
 				}
-
 		}
 
-		if ( ! empty( $plugin ) ) {
-			$this->downloadUrl = $plugin->getDownloadUrl();
-
-			// Set a unique Dist URL to prevent caching.
-			$package_url = $package->getDistUrl();
-			$package_key = sha1( $package->getUniqueName() );
-			if ( false === strpos( $package_url, $package_key ) ) {
-				$package->setDistUrl( $package_url . '#' . $package_key );
-			}
-		}
-	}
-
-	/**
-	 * Process our plugin downloads.
-	 *
-	 * @param PreFileDownloadEvent $event
-	 */
-	public function onPreFileDownload( PreFileDownloadEvent $event ) {
-		if ( empty( $this->downloadUrl ) ) {
-			return;
+		if ( $plugin ) {
+			return $plugin->getDownloadUrl();
 		}
 
-		$rfs       = $event->getRemoteFilesystem();
-		$customRfs = new RemoteFilesystem(
-			$this->downloadUrl,
-			$this->io,
-			$this->composer->getConfig(),
-			$rfs->getOptions(),
-			$rfs->isTlsDisabled()
-		);
-		$event->setRemoteFilesystem( $customRfs );
+		return null;
 	}
 
 }

@@ -3,14 +3,14 @@
   "type": "composer-plugin",
   "license": "MIT",
   "require": {
-      "vlucas/phpdotenv": "^4.1.0",
-      "composer-plugin-api": "^1.1"
+    "vlucas/phpdotenv": "^4.1.0",
+    "composer-plugin-api": "^1.0 || ^2.0"
   },
   "authors": [
-      {
-          "name": "Junaid Bhura",
-          "email": "info@junaidbhura.com"
-      }
+    {
+      "name": "Junaid Bhura",
+      "email": "info@junaidbhura.com"
+    }
   ],
   "autoload": {
     "psr-4": {
@@ -19,6 +19,7 @@
     }
   },
   "extra": {
-    "class": "Junaidbhura\\Composer\\WPProPlugins\\Installer"
+    "class": "Junaidbhura\\Composer\\WPProPlugins\\Installer",
+    "plugin-modifies-downloads": true
   }
 }

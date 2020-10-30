@@ -1,17 +1,36 @@
 # Composer Installer for Pro WordPress Plugins.
 
-**Important Note: Most EDD plugins, and Gravity Forms only allow getting the latest versions of their plugins, even if you specifically ask for a version.**
+A Composer plugin that makes it easy to install commercial WordPress plugins.
 
-Currently supports:
+Sensitive credentials (license keys, tokens) are read from environment variables or a `.env` file.
+
+## Supported Plugins
 
 1. Advanced Custom Fields Pro
-1. Gravity Forms and Add-Ons
-1. Polylang Pro
-1. WP All Import / Export Pro
+2. Gravity Forms / Add-Ons
+3. Polylang Pro
+4. WP All Import / Export Pro / Add-Ons
+
+## Overview
+
+> ⚠️ Note: Most EDD plugins, and Gravity Forms, only allow downloading the latest versions of their plugins, even if you request for a specific version.
+
+- Packages must use the names defined below otherwise they are ignored by this plugin.
+- When installing or updating a package, the package version is appended to the dist URL.
+  This versioned dist URL is used as the cache key to store ZIP archives of the package.
+  In Composer 1, the versioned dist URL is added to `composer.lock`.
+- Before downloading the package, the package's real download URL is retrieved and formatted with their corresponding environment variables, as defined below.
+  Environment variables will never be stored inside `composer.lock`.
+- If an environment variable can't be resolved, the download will fail and Composer will abort.
 
 ## Usage
 
-Create a `.env` file in the root of your WordPress site, where the composer.json file lives, which has all the license keys and settings:
+This Composer plugin requires [Composer](https://getcomposer.org/):
+
+- 1.0.0 and newer, or
+- 2.0.2 and newer
+
+Create a `.env` file in the root of your WordPress site, where the `composer.json` file lives, which has all the license keys and settings:
 
 ```
 ACF_PRO_KEY="<acf_pro_license_key>"
@@ -27,7 +46,7 @@ WP_ALL_EXPORT_PRO_URL="<registered_url_for_wpae_pro>"
 Add the following to your composer.json file:
 
 ```json
-"repositories":[
+"repositories": [
   {
     "type": "package",
     "package": {
@@ -145,7 +164,7 @@ Add the following to your composer.json file:
 },
 ```
 
-## Gravity Forms Add-Ons
+### Gravity Forms Add-Ons
 
 You can use any Gravity Forms add-on by simply adding it's slug like so:
 
@@ -157,7 +176,7 @@ For example:
 
 Here's a list of all Gravity Forms add-on slugs: [https://docs.gravityforms.com/gravity-forms-add-on-slugs/](https://docs.gravityforms.com/gravity-forms-add-on-slugs/)
 
-## WP All Import Pro Add-Ons
+### WP All Import Pro Add-Ons
 
 You can use any WP All Import Pro add-on by simply adding it's slug like so:
 
