@@ -84,16 +84,16 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 	public static function getSubscribedEvents() {
 
 		if ( version_compare( PluginInterface::PLUGIN_API_VERSION, '2.0.0', '<' ) ) {
-			return [
+			return array(
 				PackageEvents::PRE_PACKAGE_INSTALL => 'onPrePackageInstallOrUpdateInComposer1',
 				PackageEvents::PRE_PACKAGE_UPDATE  => 'onPrePackageInstallOrUpdateInComposer1',
 				PluginEvents::PRE_FILE_DOWNLOAD    => array( 'onPreFileDownloadInComposer1', -1 ),
-			];
+			);
 		}
 
-		return [
+		return array(
 			PluginEvents::PRE_FILE_DOWNLOAD => array( 'onPreFileDownloadInComposer2', -1 ),
-		];
+		);
 	}
 
 	/**
@@ -161,8 +161,9 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 	 */
 	public function onPreFileDownloadInComposer2( PreFileDownloadEvent $event ) {
 		/**
+		 * Bail early if this event is not for a package.
+		 *
 		 * @see https://github.com/composer/composer/pull/8975
-		 *     Bail early if this event is not for a package.
 		 */
 		if ( $event->getType() !== 'package' ) {
 			return;
@@ -234,7 +235,7 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 				}
 		}
 
-		if ( $plugin ) {
+		if ( ! empty( $plugin ) ) {
 			return $plugin->getDownloadUrl();
 		}
 
