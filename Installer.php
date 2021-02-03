@@ -49,9 +49,9 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 		$this->composer = $composer;
 		$this->io       = $io;
 
-		if ( file_exists( getcwd() . DIRECTORY_SEPARATOR . '.env' ) ) {
-			$dotenv = Dotenv::createImmutable( getcwd() );
-			$dotenv->load();
+		$path = getcwd();
+		if ( file_exists( $path . DIRECTORY_SEPARATOR . '.env' ) ) {
+			$this->loadDotenv( $path );
 		}
 	}
 
@@ -74,6 +74,34 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 	 */
 	public function uninstall( Composer $composer, IOInterface $io ) {
 		// no need to uninstall anything
+	}
+
+	/**
+	 * Activate vlucas/phpdotenv, if available.
+	 *
+	 * @param string $path
+	 */
+	protected function loadDotenv( $path ) {
+		// Dotenv V5
+		if ( method_exists( 'Dotenv\\Dotenv', 'createUnsafeImmutable' ) ) {
+			$dotenv = Dotenv::createUnsafeImmutable( $path );
+			$dotenv->safeLoad();
+			return;
+		}
+
+		// Dotenv V4
+		if ( method_exists( 'Dotenv\\Dotenv', 'createImmutable' ) ) {
+			$dotenv = Dotenv::createImmutable( $path );
+			$dotenv->safeLoad();
+			return;
+		}
+
+		// Dotenv V3
+		if ( method_exists( 'Dotenv\\Dotenv', 'create' ) ) {
+			$dotenv = Dotenv::create( $path );
+			$dotenv->safeLoad();
+			return;
+		}
 	}
 
 	/**
