@@ -55,16 +55,20 @@ class WpAiPro {
 
 			switch ( $this->slug ) {
 				case 'wpai-acf-add-on':
-					$name = 'ACF Add-On';
+					$name    = 'ACF Add-On';
+					$license = '';
 					break;
 				case 'wpai-linkcloak-add-on':
-					$name = 'Link Cloaking Add-On';
+					$name    = 'Link Cloaking Add-On';
+					$license = '';
 					break;
 				case 'wpai-user-add-on':
-					$name = 'User Import Add-On';
+					$name    = 'User Import Add-On';
+					$license = '';
 					break;
 				case 'wpai-woocommerce-add-on':
-					$name = 'WooCommerce Add-On';
+					$name    = 'WooCommerce Add-On';
+					$license = '';
 					break;
 				default:
 					$name = 'WP All Import';
