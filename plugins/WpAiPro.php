@@ -45,10 +45,19 @@ class WpAiPro {
 	 * @return string
 	 */
 	public function getDownloadUrl() {
-		if ( 'wp-all-export-pro' === $this->slug ) {
+		if ( 'wp-all-export-pro' === $this->slug || 'wpae-acf-add-on' === $this->slug ) {
 			$license = getenv( 'WP_ALL_EXPORT_PRO_KEY' );
 			$url     = getenv( 'WP_ALL_EXPORT_PRO_URL' );
 			$name    = 'WP All Export';
+			switch ( $this->slug ) {
+				case 'wpae-acf-add-on':
+					$name    = 'ACF Export Add-On Pro';
+					$license = '';
+					break;
+				default:
+					$name = 'WP All Export';
+			}
+
 		} else {
 			$license = getenv( 'WP_ALL_IMPORT_PRO_KEY' );
 			$url     = getenv( 'WP_ALL_IMPORT_PRO_URL' );
