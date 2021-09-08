@@ -45,33 +45,45 @@ class WpAiPro {
 	 * @return string
 	 */
 	public function getDownloadUrl() {
-		if ( 'wp-all-export-pro' === $this->slug ) {
-			$license = getenv( 'WP_ALL_EXPORT_PRO_KEY' );
-			$url     = getenv( 'WP_ALL_EXPORT_PRO_URL' );
-			$name    = 'WP All Export';
-		} else {
-			$license = getenv( 'WP_ALL_IMPORT_PRO_KEY' );
-			$url     = getenv( 'WP_ALL_IMPORT_PRO_URL' );
+		$url     = '';
+		$name    = '';
+		$license = '';
+
+		if ( 'wp-all-import-pro' === $this->slug || 0 === strpos( $this->slug, 'wpai-' ) ) {
+			// WP All Import Pro.
+			$url = getenv( 'WP_ALL_IMPORT_PRO_URL' );
 
 			switch ( $this->slug ) {
 				case 'wpai-acf-add-on':
-					$name    = 'ACF Add-On';
-					$license = '';
+					$name = 'ACF Add-On';
 					break;
 				case 'wpai-linkcloak-add-on':
-					$name    = 'Link Cloaking Add-On';
-					$license = '';
+					$name = 'Link Cloaking Add-On';
 					break;
 				case 'wpai-user-add-on':
-					$name    = 'User Import Add-On';
-					$license = '';
+					$name = 'User Import Add-On';
 					break;
 				case 'wpai-woocommerce-add-on':
-					$name    = 'WooCommerce Add-On';
-					$license = '';
+					$name = 'WooCommerce Add-On';
 					break;
 				default:
-					$name = 'WP All Import';
+					$name    = 'WP All Import';
+					$license = getenv( 'WP_ALL_IMPORT_PRO_KEY' );
+			}
+		} elseif ( 'wp-all-export-pro' === $this->slug || 0 === strpos( $this->slug, 'wpae-' ) ) {
+			// WP All Export Pro.
+			$url = getenv( 'WP_ALL_EXPORT_PRO_URL' );
+
+			switch ( $this->slug ) {
+				case 'wpae-acf-add-on':
+					$name = 'ACF Export Add-On Pro';
+					break;
+				case 'wpae-woocommerce-add-on':
+					$name = 'WooCommerce Export Add-On Pro';
+					break;
+				default:
+					$name    = 'WP All Export';
+					$license = getenv( 'WP_ALL_EXPORT_PRO_KEY' );
 			}
 		}
 
