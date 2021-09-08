@@ -151,6 +151,21 @@ Add the following to your composer.json file:
         "junaidbhura/composer-wp-pro-plugins": "*"
       }
     }
+  },
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/wpae-acf-add-on",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://www.wpallimport.com"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
   }
 ],
 "require": {
@@ -160,7 +175,8 @@ Add the following to your composer.json file:
   "junaidbhura/polylang-pro": "*",
   "junaidbhura/wp-all-import-pro": "*",
   "junaidbhura/wp-all-export-pro": "*",
-  "junaidbhura/wpai-acf-add-on": "*"
+  "junaidbhura/wpai-acf-add-on": "*",
+  "junaidbhura/wpae-acf-add-on": "*"
 },
 ```
 
@@ -185,3 +201,13 @@ You can use any WP All Import Pro add-on by simply adding it's slug like so:
 For example:
 
 `junaidbhura/wpai-acf-add-on`
+
+### WP All Export Pro Add-Ons
+
+You can use any WP All Export Pro add-on by simply adding it's slug like so:
+
+`junaidbhura/<plugin-slug>`
+
+For example:
+
+`junaidbhura/wpae-acf-add-on`
