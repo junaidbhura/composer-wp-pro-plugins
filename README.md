@@ -166,7 +166,22 @@ Add the following to your composer.json file:
         "junaidbhura/composer-wp-pro-plugins": "*"
       }
     }
-  }
+  },
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/wpae-user-add-on-pro",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://www.wpallimport.com"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  },
 ],
 "require": {
   "junaidbhura/advanced-custom-fields-pro": "*",
@@ -176,7 +191,8 @@ Add the following to your composer.json file:
   "junaidbhura/wp-all-import-pro": "*",
   "junaidbhura/wp-all-export-pro": "*",
   "junaidbhura/wpai-acf-add-on": "*",
-  "junaidbhura/wpae-acf-add-on": "*"
+  "junaidbhura/wpae-acf-add-on": "*",
+  "junaidbhura/wpae-user-add-on-pro": "*"
 },
 ```
 
