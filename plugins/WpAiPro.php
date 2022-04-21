@@ -81,6 +81,9 @@ class WpAiPro {
 				case 'wpae-woocommerce-add-on':
 					$name = 'WooCommerce Export Add-On Pro';
 					break;
+				case 'wpae-user-add-on-pro':
+					$name = 'User Export Add-On Pro';
+					break;
 				default:
 					$name    = 'WP All Export';
 					$license = getenv( 'WP_ALL_EXPORT_PRO_KEY' );
