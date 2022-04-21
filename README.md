@@ -29,6 +29,7 @@ This Composer plugin requires [Composer](https://getcomposer.org/):
 
 - 1.0.0 and newer, or
 - 2.0.2 and newer
+- 2.3+ IMPORTANT: Make sure to add trailing slashes to packages' `dist` URL as below. More info: https://github.com/junaidbhura/composer-wp-pro-plugins/issues/34
 
 Create a `.env` file in the root of your WordPress site, where the `composer.json` file lives, which has all the license keys and settings:
 
@@ -55,7 +56,7 @@ Add the following to your composer.json file:
       "type": "wordpress-plugin",
       "dist": {
         "type": "zip",
-        "url": "https://www.advancedcustomfields.com"
+        "url": "https://www.advancedcustomfields.com/"
       },
       "require": {
           "junaidbhura/composer-wp-pro-plugins": "*"
@@ -70,7 +71,7 @@ Add the following to your composer.json file:
       "type": "wordpress-plugin",
       "dist": {
         "type": "zip",
-        "url": "https://www.gravityforms.com"
+        "url": "https://www.gravityforms.com/"
       },
       "require": {
         "junaidbhura/composer-wp-pro-plugins": "*"
@@ -85,7 +86,7 @@ Add the following to your composer.json file:
       "type": "wordpress-plugin",
       "dist": {
         "type": "zip",
-        "url": "https://www.gravityforms.com"
+        "url": "https://www.gravityforms.com/"
       },
       "require": {
         "junaidbhura/composer-wp-pro-plugins": "*"
@@ -100,7 +101,7 @@ Add the following to your composer.json file:
       "type": "wordpress-plugin",
       "dist": {
         "type": "zip",
-        "url": "https://www.polylang.pro"
+        "url": "https://www.polylang.pro/"
       },
       "require": {
         "junaidbhura/composer-wp-pro-plugins": "*"
@@ -115,7 +116,7 @@ Add the following to your composer.json file:
       "type": "wordpress-plugin",
       "dist": {
         "type": "zip",
-        "url": "https://www.wpallimport.com"
+        "url": "https://www.wpallimport.com/"
       },
       "require": {
         "junaidbhura/composer-wp-pro-plugins": "*"
@@ -130,7 +131,7 @@ Add the following to your composer.json file:
       "type": "wordpress-plugin",
       "dist": {
         "type": "zip",
-        "url": "https://www.wpallimport.com"
+        "url": "https://www.wpallimport.com/"
       },
       "require": {
         "junaidbhura/composer-wp-pro-plugins": "*"
@@ -145,7 +146,7 @@ Add the following to your composer.json file:
       "type": "wordpress-plugin",
       "dist": {
         "type": "zip",
-        "url": "https://www.wpallimport.com"
+        "url": "https://www.wpallimport.com/"
       },
       "require": {
         "junaidbhura/composer-wp-pro-plugins": "*"
@@ -160,7 +161,7 @@ Add the following to your composer.json file:
       "type": "wordpress-plugin",
       "dist": {
         "type": "zip",
-        "url": "https://www.wpallimport.com"
+        "url": "https://www.wpallimport.com/"
       },
       "require": {
         "junaidbhura/composer-wp-pro-plugins": "*"
@@ -175,7 +176,7 @@ Add the following to your composer.json file:
       "type": "wordpress-plugin",
       "dist": {
         "type": "zip",
-        "url": "https://www.wpallimport.com"
+        "url": "https://www.wpallimport.com/"
       },
       "require": {
         "junaidbhura/composer-wp-pro-plugins": "*"
