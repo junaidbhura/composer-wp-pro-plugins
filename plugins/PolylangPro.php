@@ -44,6 +44,14 @@ class PolylangPro {
 			'url'        => getenv( 'POLYLANG_PRO_URL' ),
 			'version'    => $this->version,
 		) ), true );
+
+		/*
+		 * If the response is not the version we asked for then, bail
+		 */
+		if ( $response['stable_version'] !== $this->version ) ) {
+			return '';
+		}
+
 		if ( ! empty( $response['download_link'] ) ) {
 			return $response['download_link'];
 		}
