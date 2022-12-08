@@ -36,4 +36,27 @@ class Http {
 		return $response;
 	}
 
+	/**
+	 * GET request.
+	 *
+	 * @param string $url Base URL for requeset (without params)
+	 * @param array  $args Arguments to add to request
+	 * @return mixed
+	 */
+	public function get( $url = '', $args = array() ) {
+		$query_string = '';
+
+		$curl_handle = curl_init();
+		curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, 1 );
+		curl_setopt( $curl_handle, CURLOPT_FOLLOWLOCATION, true );
+		if ( ! empty( $args ) ) {
+			$query_string = http_build_query( $args, '', '&' );
+		}
+		curl_setopt( $curl_handle, CURLOPT_URL, $url . '?' . $query_string );
+		$response = curl_exec( $curl_handle );
+		curl_close( $curl_handle );
+
+		return $response;
+	}
+
 }
