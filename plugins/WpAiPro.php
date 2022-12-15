@@ -7,7 +7,6 @@
 
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
-use Exception;
 use Junaidbhura\Composer\WPProPlugins\Http;
 
 /**
@@ -101,9 +100,9 @@ class WpAiPro {
 		) ), true );
 		if ( ! empty( $response['download_link'] ) ) {
 			return $response['download_link'];
-		} else {
-			throw new Exception( 'Invalid download link for ' . $name );
 		}
+
+		return '';
 	}
 
 }
