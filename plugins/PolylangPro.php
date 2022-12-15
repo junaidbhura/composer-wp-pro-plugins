@@ -37,17 +37,20 @@ class PolylangPro {
 	 */
 	public function getDownloadUrl() {
 		$http     = new Http();
-		$response = json_decode( $http->post( 'https://polylang.pro', array(
+		$name = 'Polylang Pro';
+
+		$response = json_decode( $http->get( 'https://polylang.pro', array(
 			'edd_action' => 'get_version',
 			'license'    => getenv( 'POLYLANG_PRO_KEY' ),
-			'item_name'  => 'Polylang Pro',
+			'item_name'  => $name,
 			'url'        => getenv( 'POLYLANG_PRO_URL' ),
 			'version'    => $this->version,
 		) ), true );
 		if ( ! empty( $response['download_link'] ) ) {
 			return $response['download_link'];
+		} else {
+			throw new Exception( 'Invalid download link for ' . $name );
 		}
-		return '';
 	}
 
 }

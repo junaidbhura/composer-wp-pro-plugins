@@ -7,6 +7,7 @@
 
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
+use Exception;
 use Junaidbhura\Composer\WPProPlugins\Http;
 
 /**
@@ -91,7 +92,7 @@ class WpAiPro {
 		}
 
 		$http     = new Http();
-		$response = json_decode( $http->post( 'https://www.wpallimport.com', array(
+		$response = json_decode( $http->get( 'https://www.wpallimport.com', array(
 			'edd_action' => 'get_version',
 			'license'    => $license,
 			'item_name'  => $name,
@@ -100,8 +101,9 @@ class WpAiPro {
 		) ), true );
 		if ( ! empty( $response['download_link'] ) ) {
 			return $response['download_link'];
+		} else {
+			throw new Exception( 'Invalid download link for ' . $name );
 		}
-		return '';
 	}
 
 }
