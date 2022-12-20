@@ -63,7 +63,7 @@ class WPML {
             'wpml-translation-management' => 6094,
         ];
 
-        if (in_array($this->slug, $packages)) {
+        if (array_key_exists($this->slug, $packages)) {
             return 'https://wpml.org/?download='. $packages[$this->slug] .'&user_id='. getenv( 'WPML_USER_ID' ) .'&subscription_key='. getenv( 'WPML_KEY' ) .'&version=' . $this->version;
         }
 	}
