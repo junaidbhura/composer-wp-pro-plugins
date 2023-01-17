@@ -48,7 +48,7 @@ class PolylangPro {
 		/*
 		 * If the response is not the version we asked for then, bail
 		 */
-		if ( $this->version != $response['stable_version']) ) {
+		if ( $response['stable_version'] !== $this->version ) ) {
 			return '';
 		}
 
