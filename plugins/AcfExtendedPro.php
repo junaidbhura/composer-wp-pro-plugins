@@ -39,9 +39,9 @@ class AcfExtendedPro {
 		$http     = new Http();
 		$response = json_decode( $http->post( 'https://acf-extended.com', array(
 			'edd_action' => 'get_version',
-			'license'    => getenv( 'ACF_EXTENDED_PRO_KEY' ),
+			'license'    => getenv( 'ACFE_PRO_KEY' ),
 			'item_name'  => 'ACF Extended Pro',
-			'url'        => getenv( 'ACF_EXTENDED_PRO_URL' ),
+			'url'        => getenv( 'ACFE_PRO_URL' ),
 			'version'    => $this->version,
 		) ), true );
 		if ( ! empty( $response['download_link'] ) ) {

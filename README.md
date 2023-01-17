@@ -36,8 +36,8 @@ Create a `.env` file in the root of your WordPress site, where the `composer.jso
 
 ```
 ACF_PRO_KEY="<acf_pro_license_key>"
-ACF_EXTENDED_PRO_KEY="<acf_extended_pro_license_key>"
-ACF_EXTENDED_PRO_URL="<registered_url_for_acf_extended_pro>"
+ACFE_PRO_KEY="<acf_extended_pro_license_key>"
+ACFE_PRO_URL="<registered_url_for_acf_extended_pro>"
 GRAVITY_FORMS_KEY="<gravity_forms_license_key>"
 POLYLANG_PRO_KEY="<polylang_pro_license_key>"
 POLYLANG_PRO_URL="<registered_url_for_polylang_pro>"
