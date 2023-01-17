@@ -240,6 +240,10 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 		$package_name = $package->getName();
 
 		switch ( $package_name ) {
+			case 'junaidbhura/acf-extended-pro':
+				$plugin = new Plugins\AcfExtendedPro( $package->getPrettyVersion() );
+				break;
+
 			case 'junaidbhura/advanced-custom-fields-pro':
 				$plugin = new Plugins\AcfPro( $package->getPrettyVersion() );
 				break;
