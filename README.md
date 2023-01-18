@@ -8,8 +8,9 @@ Sensitive credentials (license keys, tokens) are read from environment variables
 
 1. Advanced Custom Fields Pro
 2. Gravity Forms / Add-Ons
-3. Polylang Pro
-4. WP All Import / Export Pro / Add-Ons
+3. Ninja Forms Add-Ons
+4. Polylang Pro
+5. WP All Import / Export Pro / Add-Ons
 
 ## Overview
 
@@ -36,6 +37,10 @@ Create a `.env` file in the root of your WordPress site, where the `composer.jso
 ```
 ACF_PRO_KEY="<acf_pro_license_key>"
 GRAVITY_FORMS_KEY="<gravity_forms_license_key>"
+NINJA_FORMS_KEY="<ninja_forms_membership_license_key>"
+NINJA_FORMS_URL="<registered_url_for_ninja_forms_membership>"
+NINJA_FORMS_<addon_slug>_KEY="<ninja_forms_addon_license_key>"
+NINJA_FORMS_<addon_slug>_URL="<registered_url_for_ninja_forms_addon>"
 POLYLANG_PRO_KEY="<polylang_pro_license_key>"
 POLYLANG_PRO_URL="<registered_url_for_polylang_pro>"
 WP_ALL_IMPORT_PRO_KEY="<wp_all_import_license_key>"
@@ -87,6 +92,21 @@ Add the following to your composer.json file:
       "dist": {
         "type": "zip",
         "url": "https://www.gravityforms.com/"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  },
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/ninja-forms-uploads",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://ninjaforms.com/"
       },
       "require": {
         "junaidbhura/composer-wp-pro-plugins": "*"
@@ -188,6 +208,7 @@ Add the following to your composer.json file:
   "junaidbhura/advanced-custom-fields-pro": "*",
   "junaidbhura/gravityforms": "*",
   "junaidbhura/gravityformspolls": "*",
+  "junaidbhura/ninja-forms-uploads": "*",
   "junaidbhura/polylang-pro": "*",
   "junaidbhura/wp-all-import-pro": "*",
   "junaidbhura/wp-all-export-pro": "*",
@@ -208,6 +229,16 @@ For example:
 `junaidbhura/gravityformspolls`
 
 Here's a list of all Gravity Forms add-on slugs: [https://docs.gravityforms.com/gravity-forms-add-on-slugs/](https://docs.gravityforms.com/gravity-forms-add-on-slugs/)
+
+### Ninja Forms Add-Ons
+
+You can use any Ninja Forms add-on by simply adding it's slug like so:
+
+`junaidbhura/ninja-forms-<addon-slug>`
+
+For example:
+
+`junaidbhura/ninja-forms-uploads`
 
 ### WP All Import Pro Add-Ons
 
