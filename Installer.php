@@ -256,6 +256,8 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 			default:
 				if ( 0 === strpos( $package_name, 'junaidbhura/gravityforms' ) ) {
 					$plugin = new Plugins\GravityForms( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
+				} elseif ( 0 === strpos( $package_name, 'junaidbhura/publishpress-' ) ) {
+					$plugin = new Plugins\PublishPressPro( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
 				} elseif ( 0 === strpos( $package_name, 'junaidbhura/wpai-' ) || 0 === strpos( $package_name, 'junaidbhura/wpae-' ) ) {
 					$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
 				}
