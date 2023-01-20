@@ -7,6 +7,7 @@
 
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
+use Composer\Semver\Semver;
 use Junaidbhura\Composer\WPProPlugins\Http;
 
 /**
@@ -44,10 +45,20 @@ class AcfExtendedPro {
 			'url'        => getenv( 'ACFE_PRO_URL' ),
 			'version'    => $this->version,
 		) ), true );
-		if ( ! empty( $response['download_link'] ) ) {
-			return $response['download_link'];
+
+		if ( empty( $response['download_link'] ) ) {
+			return '';
 		}
-		return '';
+
+		if ( empty( $response['new_version'] ) ) {
+			return '';
+		}
+
+		if ( ! Semver::satisfies( $response['new_version'], $this->version ) ) {
+			return '';
+		}
+
+		return $response['download_link'];
 	}
 
 }
