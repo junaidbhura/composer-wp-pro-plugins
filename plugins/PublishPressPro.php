@@ -45,30 +45,89 @@ class PublishPressPro {
 	 * @return string
 	 */
 	public function getDownloadUrl() {
-		$packages = array(
-			'publishpress-authors-pro'      => 7203,
-			'publishpress-blocks-pro'       => 98972,
-			'publishpress-capabilities-pro' => 44811,
-			'publishpress-checklists-pro'   => 6465,
-			'publishpress-permissions-pro'  => 34506,
-			'publishpress-planner-pro'      => 49742,
-			'publishpress-revisions-pro'    => 40280,
-			'publishpress-series-pro'       => 110550,
-		);
+		$id  = 0;
+		$env = null;
+		/**
+		 * Membership licensing.
+		 */
+		$license = ( getenv( 'PUBLISHPRESS_PRO_KEY' ) ?: null );
+		$url     = ( getenv( 'PUBLISHPRESS_PRO_URL' ) ?: null );
 
-		if ( array_key_exists( $this->slug, $packages ) ) {
-			$http     = new Http();
-			$response = json_decode( $http->get( 'https://publishpress.com', array(
-				'edd_action' => 'get_version',
-				'license'    => getenv( 'PUBLISHPRESS_PRO_KEY' ),
-				'item_id'    => $packages[ $this->slug ],
-				'url'        => getenv( 'PUBLISHPRESS_PRO_URL' ),
-				'version'    => $this->version,
-			) ), true );
+		/**
+		 * List of official plugins as of 2023-01-20.
+		 */
+		switch ( $this->slug ) {
+			case 'publishpress-authors-pro':
+				$id  = 7203;
+				$env = 'AUTHORS';
+				break;
 
-			if ( ! empty( $response['download_link'] ) ) {
-				return $response['download_link'];
-			}
+			case 'publishpress-blocks-pro':
+				$id  = 98972;
+				$env = 'BLOCKS';
+				break;
+
+			case 'publishpress-capabilities-pro':
+				$id  = 44811;
+				$env = 'CAPABILITIES';
+				break;
+
+			case 'publishpress-checklists-pro':
+				$id  = 6465;
+				$env = 'CHECKLISTS';
+				break;
+
+			case 'publishpress-permissions-pro':
+				$id  = 34506;
+				$env = 'PERMISSIONS';
+				break;
+
+			case 'publishpress-planner-pro':
+				$id  = 49742;
+				$env = 'PLANNER';
+				break;
+
+			case 'publishpress-revisions-pro':
+				$id  = 40280;
+				$env = 'REVISIONS';
+				break;
+
+			case 'publishpress-series-pro':
+				$id  = 110550;
+				$env = 'SERIES';
+				break;
+
+			default:
+				return '';
+		}
+
+		if ( $env ) {
+			/**
+			 * Use add-on licensing if available, otherwise use membership licensing.
+			 */
+			$license = ( getenv( "PUBLISHPRESS_{$env}_PRO_KEY" ) ?: $license );
+			$url     = ( getenv( "PUBLISHPRESS_{$env}_PRO_URL" ) ?: $url );
+		}
+
+		$http     = new Http();
+		$response = json_decode( $http->get( 'https://publishpress.com', array(
+			'edd_action' => 'get_version',
+			'license'    => $license,
+			'item_id'    => $id,
+			'url'        => $url,
+			'version'    => $this->version,
+		) ), true );
+
+		/**
+		 * If the response does not have a version number or the version number
+		 * does not match the package constraint, bail.
+		 */
+		if ( empty( $response['new_version'] ) || $response['new_version'] !== $this->version ) {
+			return '';
+		}
+
+		if ( ! empty( $response['download_link'] ) ) {
+			return $response['download_link'];
 		}
 
 		return '';

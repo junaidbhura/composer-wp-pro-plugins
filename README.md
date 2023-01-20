@@ -39,8 +39,10 @@ ACF_PRO_KEY="<acf_pro_license_key>"
 GRAVITY_FORMS_KEY="<gravity_forms_license_key>"
 POLYLANG_PRO_KEY="<polylang_pro_license_key>"
 POLYLANG_PRO_URL="<registered_url_for_polylang_pro>"
-PUBLISHPRESS_PRO_KEY="<publishpress_pro_license_key>"
-PUBLISHPRESS_PRO_URL="<registered_url_for_publishpress_pro>"
+PUBLISHPRESS_PRO_KEY="<publishpress_pro_membership_license_key>"
+PUBLISHPRESS_PRO_URL="<registered_url_for_publishpress_pro_membership>"
+PUBLISHPRESS_<plugin_slug>_PRO_KEY="<publishpress_pro_license_key>"
+PUBLISHPRESS_<plugin_slug>_PRO_URL="<registered_url_for_publishpress_pro>"
 WP_ALL_IMPORT_PRO_KEY="<wp_all_import_license_key>"
 WP_ALL_IMPORT_PRO_URL="<registered_url_for_wpai_pro>"
 WP_ALL_EXPORT_PRO_KEY="<wp_all_export_license_key>"
@@ -114,112 +116,7 @@ Add the following to your composer.json file:
   {
     "type": "package",
     "package": {
-      "name": "junaidbhura/publishpress-authors-pro",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://publishpress.com/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/publishpress-blocks-pro",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://publishpress.com/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/publishpress-capabilities-pro",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://publishpress.com/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/publishpress-checklists-pro",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://publishpress.com/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/publishpress-permissions-pro",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://publishpress.com/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
       "name": "junaidbhura/publishpress-planner-pro",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://publishpress.com/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/publishpress-revisions-pro",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://publishpress.com/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/publishpress-series-pro",
       "version": "<version_number>",
       "type": "wordpress-plugin",
       "dist": {
@@ -312,14 +209,7 @@ Add the following to your composer.json file:
   "junaidbhura/gravityforms": "*",
   "junaidbhura/gravityformspolls": "*",
   "junaidbhura/polylang-pro": "*",
-  "junaidbhura/publishpress-authors-pro": "*",
-  "junaidbhura/publishpress-blocks-pro": "*",
-  "junaidbhura/publishpress-capabilities-pro": "*",
-  "junaidbhura/publishpress-checklists-pro": "*",
-  "junaidbhura/publishpress-permissions-pro": "*",
   "junaidbhura/publishpress-planner-pro": "*",
-  "junaidbhura/publishpress-revisions-pro": "*",
-  "junaidbhura/publishpress-series-pro": "*",
   "junaidbhura/wp-all-import-pro": "*",
   "junaidbhura/wp-all-export-pro": "*",
   "junaidbhura/wpai-acf-add-on": "*",
@@ -342,16 +232,22 @@ Here's a list of all Gravity Forms add-on slugs: [https://docs.gravityforms.com/
 
 ### PublishPress Pro Plugins
 
-The following PublishPress Pro plugins are supported:
+You can use any PublishPress Pro plugins by simply adding it's slug like so:
 
-* `junaidbhura/publishpress-authors-pro`
-* `junaidbhura/publishpress-blocks-pro`
-* `junaidbhura/publishpress-capabilities-pro`
-* `junaidbhura/publishpress-checklists-pro`
-* `junaidbhura/publishpress-permissions-pro`
-* `junaidbhura/publishpress-planner-pro`
-* `junaidbhura/publishpress-revisions-pro`
-* `junaidbhura/publishpress-series-pro`
+`junaidbhura/<plugin-slug>`
+
+The following plugins are supported:
+
+| Package name                                | Environment variables                        |
+|:------------------------------------------- |:-------------------------------------------- |
+| `junaidbhura/publishpress-authors-pro`      | `PUBLISHPRESS_AUTHORS_PRO_<key_or_url>`      |
+| `junaidbhura/publishpress-blocks-pro`       | `PUBLISHPRESS_BLOCKS_PRO_<key_or_url>`       |
+| `junaidbhura/publishpress-capabilities-pro` | `PUBLISHPRESS_CAPABILITIES_PRO_<key_or_url>` |
+| `junaidbhura/publishpress-checklists-pro`   | `PUBLISHPRESS_CHECKLISTS_PRO_<key_or_url>`   |
+| `junaidbhura/publishpress-permissions-pro`  | `PUBLISHPRESS_PERMISSIONS_PRO_<key_or_url>`  |
+| `junaidbhura/publishpress-planner-pro`      | `PUBLISHPRESS_PLANNER_PRO_<key_or_url>`      |
+| `junaidbhura/publishpress-revisions-pro`    | `PUBLISHPRESS_REVISIONS_PRO_<key_or_url>`    |
+| `junaidbhura/publishpress-series-pro`       | `PUBLISHPRESS_SERIES_PRO_<key_or_url>`       |
 
 ### WP All Import Pro Add-Ons
 
