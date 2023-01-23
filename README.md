@@ -7,6 +7,7 @@ Sensitive credentials (license keys, tokens) are read from environment variables
 ## Supported Plugins
 
 1. Advanced Custom Fields Pro
+1. Ninja Forms Add-Ons
 1. Gravity Forms / Add-Ons
 1. Polylang Pro
 1. PublishPress Pro
@@ -40,6 +41,10 @@ ACF_PRO_KEY="<acf_pro_license_key>"
 ACFE_PRO_KEY="<acf_extended_pro_license_key>"
 ACFE_PRO_URL="<registered_url_for_acf_extended_pro>"
 GRAVITY_FORMS_KEY="<gravity_forms_license_key>"
+NINJA_FORMS_KEY="<ninja_forms_membership_license_key>"
+NINJA_FORMS_URL="<registered_url_for_ninja_forms_membership>"
+NINJA_FORMS_<addon_slug>_KEY="<ninja_forms_addon_license_key>"
+NINJA_FORMS_<addon_slug>_URL="<registered_url_for_ninja_forms_addon>"
 POLYLANG_PRO_KEY="<polylang_pro_license_key>"
 POLYLANG_PRO_URL="<registered_url_for_polylang_pro>"
 PUBLISHPRESS_PRO_KEY="<publishpress_pro_membership_license_key>"
@@ -110,6 +115,21 @@ Add the following to your composer.json file:
       "dist": {
         "type": "zip",
         "url": "https://www.gravityforms.com/"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  },
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/ninja-forms-uploads",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://ninjaforms.com/"
       },
       "require": {
         "junaidbhura/composer-wp-pro-plugins": "*"
@@ -227,6 +247,7 @@ Add the following to your composer.json file:
   "junaidbhura/advanced-custom-fields-pro": "*",
   "junaidbhura/gravityforms": "*",
   "junaidbhura/gravityformspolls": "*",
+  "junaidbhura/ninja-forms-uploads": "*",
   "junaidbhura/polylang-pro": "*",
   "junaidbhura/publishpress-planner-pro": "*",
   "junaidbhura/wp-all-import-pro": "*",
@@ -248,6 +269,59 @@ For example:
 `junaidbhura/gravityformspolls`
 
 Here's a list of all Gravity Forms add-on slugs: [https://docs.gravityforms.com/gravity-forms-add-on-slugs/](https://docs.gravityforms.com/gravity-forms-add-on-slugs/)
+
+### Ninja Forms Add-Ons
+
+You can use any Ninja Forms add-on by simply adding it's slug like so:
+
+`junaidbhura/ninja-forms-<addon-slug>`
+
+The following add-ons are supported:
+
+| Package name                                  | Environment variables                          |
+|:--------------------------------------------- |:---------------------------------------------- |
+| `junaidbhura/ninja-forms-activecampaign`      | `NINJA_FORMS_ACTIVECAMPAIGN_<key_or_url>`      |
+| `junaidbhura/ninja-forms-advanced-datepicker` | `NINJA_FORMS_ADVANCED_DATEPICKER_<key_or_url>` |
+| `junaidbhura/ninja-forms-authorize-net`       | `NINJA_FORMS_AUTHORIZE_NET_<key_or_url>`       |
+| `junaidbhura/ninja-forms-aweber`              | `NINJA_FORMS_AWEBER_<key_or_url>`              |
+| `junaidbhura/ninja-forms-campaign-monitor`    | `NINJA_FORMS_CAMPAIGN_MONITOR_<key_or_url>`    |
+| `junaidbhura/ninja-forms-capsule-crm`         | `NINJA_FORMS_CAPSULE_CRM_<key_or_url>`         |
+| `junaidbhura/ninja-forms-civicrm`             | `NINJA_FORMS_CIVICRM_<key_or_url>`             |
+| `junaidbhura/ninja-forms-cleverreach`         | `NINJA_FORMS_CLEVERREACH_<key_or_url>`         |
+| `junaidbhura/ninja-forms-clicksend`           | `NINJA_FORMS_CLICKSEND_<key_or_url>`           |
+| `junaidbhura/ninja-forms-conditional-logic`   | `NINJA_FORMS_CONDITIONAL_LOGIC_<key_or_url>`   |
+| `junaidbhura/ninja-forms-constant-contact`    | `NINJA_FORMS_CONSTANT_CONTACT_<key_or_url>`    |
+| `junaidbhura/ninja-forms-convertkit`          | `NINJA_FORMS_CONVERTKIT_<key_or_url>`          |
+| `junaidbhura/ninja-forms-elavon`              | `NINJA_FORMS_ELAVON_<key_or_url>`              |
+| `junaidbhura/ninja-forms-emailoctopus`        | `NINJA_FORMS_EMAILOCTOPUS_<key_or_url>`        |
+| `junaidbhura/ninja-forms-emma`                | `NINJA_FORMS_EMMA_<key_or_url>`                |
+| `junaidbhura/ninja-forms-excel-export`        | `NINJA_FORMS_EXCEL_EXPORT_<key_or_url>`        |
+| `junaidbhura/ninja-forms-help-scout`          | `NINJA_FORMS_HELP_SCOUT_<key_or_url>`          |
+| `junaidbhura/ninja-forms-hubspot`             | `NINJA_FORMS_HUBSPOT_<key_or_url>`             |
+| `junaidbhura/ninja-forms-insightly`           | `NINJA_FORMS_INSIGHTLY_<key_or_url>`           |
+| `junaidbhura/ninja-forms-layout-styles`       | `NINJA_FORMS_LAYOUT_STYLES_<key_or_url>`       |
+| `junaidbhura/ninja-forms-mailchimp`           | `NINJA_FORMS_MAILCHIMP_<key_or_url>`           |
+| `junaidbhura/ninja-forms-mailpoet`            | `NINJA_FORMS_MAILPOET_<key_or_url>`            |
+| `junaidbhura/ninja-forms-multi-step`          | `NINJA_FORMS_MULTI_STEP_<key_or_url>`          |
+| `junaidbhura/ninja-forms-onepagecrm`          | `NINJA_FORMS_ONEPAGECRM_<key_or_url>`          |
+| `junaidbhura/ninja-forms-paypal-express`      | `NINJA_FORMS_PAYPAL_EXPRESS_<key_or_url>`      |
+| `junaidbhura/ninja-forms-pdf-submissions`     | `NINJA_FORMS_PDF_SUBMISSIONS_<key_or_url>`     |
+| `junaidbhura/ninja-forms-pipeline-crm`        | `NINJA_FORMS_PIPELINE_CRM_<key_or_url>`        |
+| `junaidbhura/ninja-forms-post-creation`       | `NINJA_FORMS_POST_CREATION_<key_or_url>`       |
+| `junaidbhura/ninja-forms-recurly`             | `NINJA_FORMS_RECURLY_<key_or_url>`             |
+| `junaidbhura/ninja-forms-salesforce`          | `NINJA_FORMS_SALESFORCE_<key_or_url>`          |
+| `junaidbhura/ninja-forms-save-progress`       | `NINJA_FORMS_SAVE_PROGRESS_<key_or_url>`       |
+| `junaidbhura/ninja-forms-scheduled-exports`   | `NINJA_FORMS_SCHEDULED_EXPORTS_<key_or_url>`   |
+| `junaidbhura/ninja-forms-slack`               | `NINJA_FORMS_SLACK_<key_or_url>`               |
+| `junaidbhura/ninja-forms-stripe`              | `NINJA_FORMS_STRIPE_<key_or_url>`              |
+| `junaidbhura/ninja-forms-trello`              | `NINJA_FORMS_TRELLO_<key_or_url>`              |
+| `junaidbhura/ninja-forms-twilio`              | `NINJA_FORMS_TWILIO_<key_or_url>`              |
+| `junaidbhura/ninja-forms-uploads`             | `NINJA_FORMS_UPLOADS_<key_or_url>`             |
+| `junaidbhura/ninja-forms-user-analytics`      | `NINJA_FORMS_USER_ANALYTICS_<key_or_url>`      |
+| `junaidbhura/ninja-forms-user-management`     | `NINJA_FORMS_USER_MANAGEMENT_<key_or_url>`     |
+| `junaidbhura/ninja-forms-webhooks`            | `NINJA_FORMS_WEBHOOKS_<key_or_url>`            |
+| `junaidbhura/ninja-forms-zapier`              | `NINJA_FORMS_ZAPIER_<key_or_url>`              |
+| `junaidbhura/ninja-forms-zoho`                | `NINJA_FORMS_ZOHO_<key_or_url>`                |
 
 ### PublishPress Pro Plugins
 
