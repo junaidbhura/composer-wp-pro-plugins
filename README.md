@@ -7,10 +7,11 @@ Sensitive credentials (license keys, tokens) are read from environment variables
 ## Supported Plugins
 
 1. Advanced Custom Fields Pro
-2. Gravity Forms / Add-Ons
-3. Polylang Pro
-4. PublishPress Pro
-5. WP All Import / Export Pro / Add-Ons
+1. Gravity Forms / Add-Ons
+1. Polylang Pro
+1. PublishPress Pro
+1. Advanced Custom Fields Extended Pro
+1. WP All Import / Export Pro / Add-Ons
 
 ## Overview
 
@@ -36,6 +37,8 @@ Create a `.env` file in the root of your WordPress site, where the `composer.jso
 
 ```
 ACF_PRO_KEY="<acf_pro_license_key>"
+ACFE_PRO_KEY="<acf_extended_pro_license_key>"
+ACFE_PRO_URL="<registered_url_for_acf_extended_pro>"
 GRAVITY_FORMS_KEY="<gravity_forms_license_key>"
 POLYLANG_PRO_KEY="<polylang_pro_license_key>"
 POLYLANG_PRO_URL="<registered_url_for_polylang_pro>"
@@ -53,6 +56,21 @@ Add the following to your composer.json file:
 
 ```json
 "repositories": [
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/acf-extended-pro",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://www.acf-extended.com/"
+      },
+      "require": {
+          "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  },
   {
     "type": "package",
     "package": {
@@ -205,6 +223,7 @@ Add the following to your composer.json file:
   },
 ],
 "require": {
+  "junaidbhura/acf-extended-pro": "*",
   "junaidbhura/advanced-custom-fields-pro": "*",
   "junaidbhura/gravityforms": "*",
   "junaidbhura/gravityformspolls": "*",
