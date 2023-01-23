@@ -1,6 +1,6 @@
 <?php
 /**
- * Polylang Pro Plugin.
+ * ACF Extended Pro Plugin.
  *
  * @package Junaidbhura\Composer\WPProPlugins\Plugins
  */
@@ -11,9 +11,9 @@ use Composer\Semver\Semver;
 use Junaidbhura\Composer\WPProPlugins\Http;
 
 /**
- * PolylangPro class.
+ * AcfExtendedPro class.
  */
-class PolylangPro {
+class AcfExtendedPro {
 
 	/**
 	 * The version number of the plugin to download.
@@ -23,7 +23,7 @@ class PolylangPro {
 	protected $version = '';
 
 	/**
-	 * PolylangPro constructor.
+	 * AcfExtendedPro constructor.
 	 *
 	 * @param string $version
 	 */
@@ -38,11 +38,11 @@ class PolylangPro {
 	 */
 	public function getDownloadUrl() {
 		$http     = new Http();
-		$response = json_decode( $http->post( 'https://polylang.pro', array(
+		$response = json_decode( $http->post( 'https://acf-extended.com', array(
 			'edd_action' => 'get_version',
-			'license'    => getenv( 'POLYLANG_PRO_KEY' ),
-			'item_name'  => 'Polylang Pro',
-			'url'        => getenv( 'POLYLANG_PRO_URL' ),
+			'license'    => getenv( 'ACFE_PRO_KEY' ),
+			'item_name'  => 'ACF Extended Pro',
+			'url'        => getenv( 'ACFE_PRO_URL' ),
 			'version'    => $this->version,
 		) ), true );
 
