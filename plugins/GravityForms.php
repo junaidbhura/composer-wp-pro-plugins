@@ -46,7 +46,7 @@ class GravityForms {
 	 */
 	public function getDownloadUrl() {
 		$http     = new Http();
-		$response = unserialize( $http->post( 'https://www.gravityhelp.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=' . $this->slug . '&key=' . getenv( 'GRAVITY_FORMS_KEY' ) ) );
+		$response = unserialize( $http->post( 'https://gravityapi.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=' . $this->slug . '&key=' . getenv( 'GRAVITY_FORMS_KEY' ) ) );
 		if ( ! empty( $response['download_url_latest'] ) ) {
 			return str_replace( 'http://', 'https://', $response['download_url_latest'] );
 		}
