@@ -7,24 +7,12 @@
 
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
+use UnexpectedValueException;
+
 /**
  * Wpml class.
  */
-class Wpml {
-
-    /**
-     * The version number of the plugin to download.
-     *
-     * @var string Version number.
-     */
-    protected $version = '';
-
-    /**
-     * The slug of which plugin to download.
-     *
-     * @var string Plugin slug.
-     */
-    protected $slug = '';
+class Wpml extends AbstractPlugin {
 
     /**
      * Wpml constructor.
@@ -33,8 +21,7 @@ class Wpml {
      * @param string $slug
      */
     public function __construct( $version = '', $slug = 'wpml-sitepress-multilingual-cms' ) {
-        $this->version = $version;
-        $this->slug    = $slug;
+        parent::__construct( $version, $slug );
     }
 
 	/**
@@ -63,9 +50,14 @@ class Wpml {
             'wpml-wpforms'                     => 5368995,
         );
 
-        if ( array_key_exists( $this->slug, $packages ) ) {
-            return 'https://wpml.org/?download=' . $packages[ $this->slug ] . '&user_id=' . getenv( 'WPML_USER_ID' ) . '&subscription_key=' . getenv( 'WPML_KEY' ) . '&version=' . $this->version;
+        if ( ! array_key_exists( $this->slug, $packages ) ) {
+            throw new UnexpectedValueException( sprintf(
+                'Could not find a matching package for %s. Check the package spelling and that the package is supported',
+                'junaidbhura/' . $this->slug
+            ) );
         }
+
+        return 'https://wpml.org/?download=' . $packages[ $this->slug ] . '&user_id=' . getenv( 'WPML_USER_ID' ) . '&subscription_key=' . getenv( 'WPML_KEY' ) . '&version=' . $this->version;
 	}
 
 }
