@@ -63,6 +63,11 @@ class PublishPressPro extends AbstractEddPlugin {
 				$env = 'CHECKLISTS';
 				break;
 
+			case 'publishpress-future-pro':
+				$id  = 129032;
+				$env = 'FUTURE';
+				break;
+
 			case 'publishpress-permissions-pro':
 				$id  = 34506;
 				$env = 'PERMISSIONS';
