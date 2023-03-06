@@ -8,6 +8,7 @@
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
 use Junaidbhura\Composer\WPProPlugins\Http;
+use UnexpectedValueException;
 
 /**
  * PublishPressPro class.
@@ -83,7 +84,10 @@ class PublishPressPro extends AbstractEddPlugin {
 				break;
 
 			default:
-				return '';
+				throw new UnexpectedValueException(sprintf(
+					'Could not find a matching package for %s. Check the package spelling and that the package is supported',
+					'junaidbhura/' . $this->slug
+				));
 		}
 
 		if ( $env ) {
