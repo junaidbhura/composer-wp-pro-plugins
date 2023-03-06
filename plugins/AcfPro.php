@@ -10,23 +10,7 @@ namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 /**
  * AcfPro class.
  */
-class AcfPro {
-
-	/**
-	 * The version number of the plugin to download.
-	 *
-	 * @var string Version number.
-	 */
-	protected $version = '';
-
-	/**
-	 * AcfPro constructor.
-	 *
-	 * @param string $version
-	 */
-	public function __construct( $version = '' ) {
-		$this->version = $version;
-	}
+class AcfPro extends AbstractPlugin {
 
 	/**
 	 * Get the download URL for this plugin.

@@ -238,34 +238,35 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 	protected function getDownloadUrl( PackageInterface $package ) {
 		$plugin       = null;
 		$package_name = $package->getName();
+		$plugin_name  = str_replace( 'junaidbhura/', '', $package_name );
 
 		switch ( $package_name ) {
 			case 'junaidbhura/acf-extended-pro':
-				$plugin = new Plugins\AcfExtendedPro( $package->getPrettyVersion() );
+				$plugin = new Plugins\AcfExtendedPro( $package->getPrettyVersion(), $plugin_name );
 				break;
 
 			case 'junaidbhura/advanced-custom-fields-pro':
-				$plugin = new Plugins\AcfPro( $package->getPrettyVersion() );
+				$plugin = new Plugins\AcfPro( $package->getPrettyVersion(), $plugin_name );
 				break;
 
 			case 'junaidbhura/polylang-pro':
-				$plugin = new Plugins\PolylangPro( $package->getPrettyVersion() );
+				$plugin = new Plugins\PolylangPro( $package->getPrettyVersion(), $plugin_name );
 				break;
 
 			case 'junaidbhura/wp-all-import-pro':
 			case 'junaidbhura/wp-all-export-pro':
-				$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
+				$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), $plugin_name );
 				break;
 
 			default:
 				if ( 0 === strpos( $package_name, 'junaidbhura/gravityforms' ) ) {
-					$plugin = new Plugins\GravityForms( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
+					$plugin = new Plugins\GravityForms( $package->getPrettyVersion(), $plugin_name );
 				} elseif ( 0 === strpos( $package_name, 'junaidbhura/ninja-forms-' ) ) {
-					$plugin = new Plugins\NinjaForms( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
+					$plugin = new Plugins\NinjaForms( $package->getPrettyVersion(), $plugin_name );
 				} elseif ( 0 === strpos( $package_name, 'junaidbhura/publishpress-' ) ) {
-					$plugin = new Plugins\PublishPressPro( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
+					$plugin = new Plugins\PublishPressPro( $package->getPrettyVersion(), $plugin_name );
 				} elseif ( 0 === strpos( $package_name, 'junaidbhura/wpai-' ) || 0 === strpos( $package_name, 'junaidbhura/wpae-' ) ) {
-					$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), str_replace( 'junaidbhura/', '', $package_name ) );
+					$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), $plugin_name );
 				}
 		}
 

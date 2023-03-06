@@ -8,25 +8,12 @@
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
 use Junaidbhura\Composer\WPProPlugins\Http;
+use UnexpectedValueException;
 
 /**
  * GravityForms class.
  */
-class GravityForms {
-
-	/**
-	 * The version number of the plugin to download.
-	 *
-	 * @var string Version number.
-	 */
-	protected $version = '';
-
-	/**
-	 * The slug of which Gravity Forms plugin to download.
-	 *
-	 * @var string Plugin slug.
-	 */
-	protected $slug = '';
+class GravityForms extends AbstractPlugin {
 
 	/**
 	 * GravityForms constructor.
@@ -35,8 +22,7 @@ class GravityForms {
 	 * @param string $slug
 	 */
 	public function __construct( $version = '', $slug = 'gravityforms' ) {
-		$this->version = $version;
-		$this->slug    = $slug;
+		parent::__construct( $version, $slug );
 	}
 
 	/**
@@ -47,10 +33,15 @@ class GravityForms {
 	public function getDownloadUrl() {
 		$http     = new Http();
 		$response = unserialize( $http->post( 'https://gravityapi.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=' . $this->slug . '&key=' . getenv( 'GRAVITY_FORMS_KEY' ) ) );
-		if ( ! empty( $response['download_url_latest'] ) ) {
-			return str_replace( 'http://', 'https://', $response['download_url_latest'] );
+
+		if ( empty( $response['download_url_latest'] ) || ! is_string( $response['download_url_latest'] ) ) {
+			throw new UnexpectedValueException( sprintf(
+				'Expected a valid download URL for package %s',
+				'junaidbhura/' . $this->slug
+			) );
 		}
-		return '';
+
+		return str_replace( 'http://', 'https://', $response['download_url_latest'] );
 	}
 
 }
