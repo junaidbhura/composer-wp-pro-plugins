@@ -12,21 +12,7 @@ use Junaidbhura\Composer\WPProPlugins\Http;
 /**
  * GravityForms class.
  */
-class GravityForms {
-
-	/**
-	 * The version number of the plugin to download.
-	 *
-	 * @var string Version number.
-	 */
-	protected $version = '';
-
-	/**
-	 * The slug of which Gravity Forms plugin to download.
-	 *
-	 * @var string Plugin slug.
-	 */
-	protected $slug = '';
+class GravityForms extends AbstractPlugin {
 
 	/**
 	 * GravityForms constructor.
@@ -35,8 +21,7 @@ class GravityForms {
 	 * @param string $slug
 	 */
 	public function __construct( $version = '', $slug = 'gravityforms' ) {
-		$this->version = $version;
-		$this->slug    = $slug;
+		parent::__construct( $version, $slug );
 	}
 
 	/**

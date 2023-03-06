@@ -7,29 +7,12 @@
 
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
-use Composer\Semver\Semver;
 use Junaidbhura\Composer\WPProPlugins\Http;
 
 /**
  * PolylangPro class.
  */
-class PolylangPro {
-
-	/**
-	 * The version number of the plugin to download.
-	 *
-	 * @var string Version number.
-	 */
-	protected $version = '';
-
-	/**
-	 * PolylangPro constructor.
-	 *
-	 * @param string $version
-	 */
-	public function __construct( $version = '' ) {
-		$this->version = $version;
-	}
+class PolylangPro extends AbstractEddPlugin {
 
 	/**
 	 * Get the download URL for this plugin.
@@ -46,19 +29,7 @@ class PolylangPro {
 			'version'    => $this->version,
 		) ), true );
 
-		if ( empty( $response['download_link'] ) ) {
-			return '';
-		}
-
-		if ( empty( $response['new_version'] ) ) {
-			return '';
-		}
-
-		if ( ! Semver::satisfies( $response['new_version'], $this->version ) ) {
-			return '';
-		}
-
-		return $response['download_link'];
+		return $this->extractDownloadUrl( $response );
 	}
 
 }

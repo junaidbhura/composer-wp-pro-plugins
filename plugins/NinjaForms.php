@@ -7,38 +7,12 @@
 
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
-use Composer\Semver\Semver;
 use Junaidbhura\Composer\WPProPlugins\Http;
 
 /**
  * NinjaForms class.
  */
-class NinjaForms {
-
-	/**
-	 * The version number of the plugin to download.
-	 *
-	 * @var string Version number.
-	 */
-	protected $version = '';
-
-	/**
-	 * The slug of which plugin to download.
-	 *
-	 * @var string Plugin slug.
-	 */
-	protected $slug = '';
-
-	/**
-	 * WpAiPro constructor.
-	 *
-	 * @param string $version
-	 * @param string $slug
-	 */
-	public function __construct( $version = '', $slug = '' ) {
-		$this->version = $version;
-		$this->slug    = $slug;
-	}
+class NinjaForms extends AbstractEddPlugin {
 
 	/**
 	 * Get the download URL for this plugin.
@@ -341,19 +315,7 @@ class NinjaForms {
 			'version'    => $this->version,
 		) ), true );
 
-		if ( empty( $response['download_link'] ) ) {
-			return '';
-		}
-
-		if ( empty( $response['new_version'] ) ) {
-			return '';
-		}
-
-		if ( ! Semver::satisfies( $response['new_version'], $this->version ) ) {
-			return '';
-		}
-
-		return $response['download_link'];
+		return $this->extractDownloadUrl( $response );
 	}
 
 }

@@ -7,27 +7,12 @@
 
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
-use Composer\Semver\Semver;
 use Junaidbhura\Composer\WPProPlugins\Http;
 
 /**
  * PublishPressPro class.
  */
-class PublishPressPro {
-
-	/**
-	 * The version number of the plugin to download.
-	 *
-	 * @var string Version number.
-	 */
-	protected $version = '';
-
-	/**
-	 * The slug of which plugin to download.
-	 *
-	 * @var string Plugin slug.
-	 */
-	protected $slug = '';
+class PublishPressPro extends AbstractEddPlugin {
 
 	/**
 	 * WpAiPro constructor.
@@ -36,8 +21,7 @@ class PublishPressPro {
 	 * @param string $slug
 	 */
 	public function __construct( $version = '', $slug = 'publishpress-planner-pro' ) {
-		$this->version = $version;
-		$this->slug    = $slug;
+		parent::__construct( $version, $slug );
 	}
 
 	/**
@@ -119,19 +103,7 @@ class PublishPressPro {
 			'version'    => $this->version,
 		) ), true );
 
-		if ( empty( $response['download_link'] ) ) {
-			return '';
-		}
-
-		if ( empty( $response['new_version'] ) ) {
-			return '';
-		}
-
-		if ( ! Semver::satisfies( $response['new_version'], $this->version ) ) {
-			return '';
-		}
-
-		return $response['download_link'];
+		return $this->extractDownloadUrl( $response );
 	}
 
 }
