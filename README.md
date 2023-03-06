@@ -247,141 +247,6 @@ Add the following to your composer.json file:
   {
     "type": "package",
     "package": {
-      "name": "junaidbhura/wpml-sitepress-multilingual-cms",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://wpml.org/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wpml-string-translation",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://wpml.org/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wpml-media-translation",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://wpml.org/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wpml-woocommerce-multilingual",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://wpml.org/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wpml-gravityforms-multilingual",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://wpml.org/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wpml-contact-form-7-multilingual",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://wpml.org/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wpml-ninja-forms",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://wpml.org/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wpml-wpforms",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://wpml.org/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wpml-buddypress-multilingual",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://wpml.org/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
       "name": "junaidbhura/wpml-acfml",
       "version": "<version_number>",
       "type": "wordpress-plugin",
@@ -412,52 +277,7 @@ Add the following to your composer.json file:
   {
     "type": "package",
     "package": {
-      "name": "junaidbhura/wpml-mailchimp-for-wp",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://wpml.org/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wpml-wp-seo-multilingual",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://wpml.org/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wpml-types",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://wpml.org/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wpml-sticky-links",
+      "name": "junaidbhura/wpml-buddypress-multilingual",
       "version": "<version_number>",
       "type": "wordpress-plugin",
       "dist": {
@@ -487,6 +307,126 @@ Add the following to your composer.json file:
   {
     "type": "package",
     "package": {
+      "name": "junaidbhura/wpml-contact-form-7-multilingual",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://wpml.org/"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  },
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/wpml-gravityforms-multilingual",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://wpml.org/"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  },
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/wpml-mailchimp-for-wp",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://wpml.org/"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  },
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/wpml-media-translation",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://wpml.org/"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  },
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/wpml-ninja-forms",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://wpml.org/"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  },
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/wpml-sitepress-multilingual-cms",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://wpml.org/"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  },
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/wpml-sticky-links",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://wpml.org/"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  },
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/wpml-string-translation",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://wpml.org/"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  },
+  {
+    "type": "package",
+    "package": {
       "name": "junaidbhura/wpml-translation-management",
       "version": "<version_number>",
       "type": "wordpress-plugin",
@@ -499,7 +439,66 @@ Add the following to your composer.json file:
       }
     }
   },
-
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/wpml-types",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://wpml.org/"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  },
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/wpml-woocommerce-multilingual",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://wpml.org/"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  },
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/wpml-wp-seo-multilingual",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://wpml.org/"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  },
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/wpml-wpforms",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://wpml.org/"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  }
 ],
 "require": {
   "junaidbhura/acf-extended-pro": "*",
@@ -515,22 +514,22 @@ Add the following to your composer.json file:
   "junaidbhura/wpae-acf-add-on": "*",
   "junaidbhura/wpae-user-add-on-pro": "*",
   "junaidbhura/wpml-sitepress-multilingual-cms": "*",
-  "junaidbhura/wpml-string-translation": "*",
-  "junaidbhura/wpml-media-translation": "*",
-  "junaidbhura/wpml-woocommerce-multilingual": "*",
-  "junaidbhura/wpml-gravityforms-multilingual": "*",
-  "junaidbhura/wpml-contact-form-7-multilingual": "*",
-  "junaidbhura/wpml-ninja-forms": "*",
-  "junaidbhura/wpml-wpforms": "*",
-  "junaidbhura/wpml-buddypress-multilingual": "*",
   "junaidbhura/wpml-acfml": "*",
   "junaidbhura/wpml-all-import": "*",
-  "junaidbhura/wpml-mailchimp-for-wp": "*",
-  "junaidbhura/wpml-wp-seo-multilingual": "*",
-  "junaidbhura/wpml-types": "*",
-  "junaidbhura/wpml-sticky-links": "*",
+  "junaidbhura/wpml-buddypress-multilingual": "*",
   "junaidbhura/wpml-cms-nav": "*",
-  "junaidbhura/wpml-translation-management": "*"
+  "junaidbhura/wpml-contact-form-7-multilingual": "*",
+  "junaidbhura/wpml-gravityforms-multilingual": "*",
+  "junaidbhura/wpml-mailchimp-for-wp": "*",
+  "junaidbhura/wpml-media-translation": "*",
+  "junaidbhura/wpml-ninja-forms": "*",
+  "junaidbhura/wpml-sticky-links": "*",
+  "junaidbhura/wpml-string-translation": "*",
+  "junaidbhura/wpml-translation-management": "*",
+  "junaidbhura/wpml-types": "*",
+  "junaidbhura/wpml-woocommerce-multilingual": "*",
+  "junaidbhura/wpml-wp-seo-multilingual": "*",
+  "junaidbhura/wpml-wpforms": "*"
 },
 ```
 
@@ -641,42 +640,22 @@ For example:
 
 ### WPML Add-Ons
 
-You can use any WPML add-on by simply adding it's slug like so:
+The following WPML plugins and add-ons are supported:
 
-`junaidbhura/<plugin-slug>`
-
-For example:
-
-`junaidbhura/wpml-sitepress-multilingual-cms`
-
-`junaidbhura/wpml-string-translation`
-
-`junaidbhura/wpml-media-translation`
-
-`junaidbhura/wpml-woocommerce-multilingual`
-
-`junaidbhura/wpml-gravityforms-multilingual`
-
-`junaidbhura/wpml-contact-form-7-multilingual`
-
-`junaidbhura/wpml-ninja-forms`
-
-`junaidbhura/wpml-wpforms`
-
-`junaidbhura/wpml-buddypress-multilingual`
-
-`junaidbhura/wpml-acfml`
-
-`junaidbhura/wpml-all-import`
-
-`junaidbhura/wpml-mailchimp-for-wp`
-
-`junaidbhura/wpml-wp-seo-multilingual`
-
-`junaidbhura/wpml-types`
-
-`junaidbhura/wpml-sticky-links`
-
-`junaidbhura/wpml-cms-nav`
-
-`junaidbhura/wpml-translation-management`
+* `junaidbhura/wpml-acfml`
+* `junaidbhura/wpml-all-import`
+* `junaidbhura/wpml-buddypress-multilingual`
+* `junaidbhura/wpml-cms-nav`
+* `junaidbhura/wpml-contact-form-7-multilingual`
+* `junaidbhura/wpml-gravityforms-multilingual`
+* `junaidbhura/wpml-mailchimp-for-wp`
+* `junaidbhura/wpml-media-translation`
+* `junaidbhura/wpml-ninja-forms`
+* `junaidbhura/wpml-sitepress-multilingual-cms`
+* `junaidbhura/wpml-sticky-links`
+* `junaidbhura/wpml-string-translation`
+* `junaidbhura/wpml-translation-management`
+* `junaidbhura/wpml-types`
+* `junaidbhura/wpml-woocommerce-multilingual`
+* `junaidbhura/wpml-wp-seo-multilingual`
+* `junaidbhura/wpml-wpforms`
