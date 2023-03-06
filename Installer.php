@@ -268,7 +268,7 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 				} elseif ( 0 === strpos( $package_name, 'junaidbhura/wpai-' ) || 0 === strpos( $package_name, 'junaidbhura/wpae-' ) ) {
 					$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), $plugin_name );
 				} elseif ( 0 === strpos( $package_name, 'junaidbhura/wpml-' ) ) {
-					$plugin = new Plugins\WPML( $package->getPrettyVersion(), $plugin_name );
+					$plugin = new Plugins\Wpml( $package->getPrettyVersion(), $plugin_name );
 				}
 		}
 

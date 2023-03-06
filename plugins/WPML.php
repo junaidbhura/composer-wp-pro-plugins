@@ -1,6 +1,6 @@
 <?php
 /**
- * ACF Pro Plugin.
+ * WPML Plugin.
  *
  * @package Junaidbhura\Composer\WPProPlugins\Plugins
  */
@@ -8,9 +8,9 @@
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
 /**
- * AcfPro class.
+ * Wpml class.
  */
-class WPML {
+class Wpml {
 
     /**
      * The version number of the plugin to download.
@@ -27,7 +27,7 @@ class WPML {
     protected $slug = '';
 
     /**
-     * WpAiPro constructor.
+     * Wpml constructor.
      *
      * @param string $version
      * @param string $slug
