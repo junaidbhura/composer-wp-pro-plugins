@@ -13,6 +13,7 @@ Sensitive credentials (license keys, tokens) are read from environment variables
 1. PublishPress Pro
 1. Advanced Custom Fields Extended Pro
 1. WP All Import / Export Pro / Add-Ons
+1. WPML
 
 ## Overview
 
@@ -55,6 +56,8 @@ WP_ALL_IMPORT_PRO_KEY="<wp_all_import_license_key>"
 WP_ALL_IMPORT_PRO_URL="<registered_url_for_wpai_pro>"
 WP_ALL_EXPORT_PRO_KEY="<wp_all_export_license_key>"
 WP_ALL_EXPORT_PRO_URL="<registered_url_for_wpae_pro>"
+WPML_USER_ID="<wpml_user_id>"
+WPML_KEY="<wpml_key>"
 ```
 
 Add the following to your composer.json file:
@@ -241,6 +244,36 @@ Add the following to your composer.json file:
       }
     }
   },
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/wpml-sitepress-multilingual-cms",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://wpml.org/"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  },
+  {
+    "type": "package",
+    "package": {
+      "name": "junaidbhura/wpml-string-translation",
+      "version": "<version_number>",
+      "type": "wordpress-plugin",
+      "dist": {
+        "type": "zip",
+        "url": "https://wpml.org/"
+      },
+      "require": {
+        "junaidbhura/composer-wp-pro-plugins": "*"
+      }
+    }
+  }
 ],
 "require": {
   "junaidbhura/acf-extended-pro": "*",
@@ -254,7 +287,9 @@ Add the following to your composer.json file:
   "junaidbhura/wp-all-export-pro": "*",
   "junaidbhura/wpai-acf-add-on": "*",
   "junaidbhura/wpae-acf-add-on": "*",
-  "junaidbhura/wpae-user-add-on-pro": "*"
+  "junaidbhura/wpae-user-add-on-pro": "*",
+  "junaidbhura/wpml-sitepress-multilingual-cms": "*",
+  "junaidbhura/wpml-string-translation": "*"
 },
 ```
 
@@ -362,3 +397,28 @@ You can use any WP All Export Pro add-on by simply adding it's slug like so:
 For example:
 
 `junaidbhura/wpae-acf-add-on`
+
+### WPML Add-Ons
+
+You can use any WPML add-on by simply adding it's slug like so:
+
+`junaidbhura/wpml-<addon-slug>`
+
+The following add-ons are supported:
+
+* `junaidbhura/wpml-acfml`
+* `junaidbhura/wpml-all-import`
+* `junaidbhura/wpml-buddypress-multilingual`
+* `junaidbhura/wpml-cms-nav`
+* `junaidbhura/wpml-contact-form-7-multilingual`
+* `junaidbhura/wpml-gravityforms-multilingual`
+* `junaidbhura/wpml-mailchimp-for-wp`
+* `junaidbhura/wpml-media-translation`
+* `junaidbhura/wpml-ninja-forms`
+* `junaidbhura/wpml-sticky-links`
+* `junaidbhura/wpml-string-translation`
+* `junaidbhura/wpml-translation-management`
+* `junaidbhura/wpml-types`
+* `junaidbhura/wpml-woocommerce-multilingual`
+* `junaidbhura/wpml-wp-seo-multilingual`
+* `junaidbhura/wpml-wpforms`

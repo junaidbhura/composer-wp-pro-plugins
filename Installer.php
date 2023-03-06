@@ -267,6 +267,8 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 					$plugin = new Plugins\PublishPressPro( $package->getPrettyVersion(), $plugin_name );
 				} elseif ( 0 === strpos( $package_name, 'junaidbhura/wpai-' ) || 0 === strpos( $package_name, 'junaidbhura/wpae-' ) ) {
 					$plugin = new Plugins\WpAiPro( $package->getPrettyVersion(), $plugin_name );
+				} elseif ( 0 === strpos( $package_name, 'junaidbhura/wpml-' ) ) {
+					$plugin = new Plugins\Wpml( $package->getPrettyVersion(), $plugin_name );
 				}
 		}
 
