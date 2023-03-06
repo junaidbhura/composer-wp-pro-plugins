@@ -35,10 +35,10 @@ class GravityForms extends AbstractPlugin {
 		$response = unserialize( $http->post( 'https://gravityapi.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=' . $this->slug . '&key=' . getenv( 'GRAVITY_FORMS_KEY' ) ) );
 
 		if ( empty( $response['download_url_latest'] ) || ! is_string( $response['download_url_latest'] ) ) {
-			throw new UnexpectedValueException(sprintf(
+			throw new UnexpectedValueException( sprintf(
 				'Expected a valid download URL for package %s',
 				'junaidbhura/' . $this->slug
-			));
+			) );
 		}
 
 		return str_replace( 'http://', 'https://', $response['download_url_latest'] );

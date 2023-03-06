@@ -296,10 +296,10 @@ class NinjaForms extends AbstractEddPlugin {
 				break;
 
 			default:
-				throw new UnexpectedValueException(sprintf(
+				throw new UnexpectedValueException( sprintf(
 					'Could not find a matching package for %s. Check the package spelling and that the package is supported',
 					'junaidbhura/' . $this->slug
-				));
+				) );
 		}
 
 		if ( $env ) {
