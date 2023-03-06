@@ -337,6 +337,7 @@ The following plugins are supported:
 | `junaidbhura/publishpress-blocks-pro`       | `PUBLISHPRESS_BLOCKS_PRO_<key_or_url>`       |
 | `junaidbhura/publishpress-capabilities-pro` | `PUBLISHPRESS_CAPABILITIES_PRO_<key_or_url>` |
 | `junaidbhura/publishpress-checklists-pro`   | `PUBLISHPRESS_CHECKLISTS_PRO_<key_or_url>`   |
+| `junaidbhura/publishpress-future-pro`       | `PUBLISHPRESS_FUTURE_PRO_<key_or_url>`       |
 | `junaidbhura/publishpress-permissions-pro`  | `PUBLISHPRESS_PERMISSIONS_PRO_<key_or_url>`  |
 | `junaidbhura/publishpress-planner-pro`      | `PUBLISHPRESS_PLANNER_PRO_<key_or_url>`      |
 | `junaidbhura/publishpress-revisions-pro`    | `PUBLISHPRESS_REVISIONS_PRO_<key_or_url>`    |
