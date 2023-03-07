@@ -18,7 +18,12 @@ class AcfPro extends AbstractPlugin {
 	 * @return string
 	 */
 	public function getDownloadUrl() {
-		return 'https://connect.advancedcustomfields.com/index.php?p=pro&a=download&k=' . getenv( 'ACF_PRO_KEY' ) . '&t=' . $this->version;
+		return 'https://connect.advancedcustomfields.com/index.php?' . http_build_query( array(
+			'p' => 'pro',
+			'a' => 'download',
+			'k' => getenv( 'ACF_PRO_KEY' ),
+			't' => $this->version,
+		), '', '&' );
 	}
 
 }

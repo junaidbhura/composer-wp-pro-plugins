@@ -32,7 +32,11 @@ class GravityForms extends AbstractPlugin {
 	 */
 	public function getDownloadUrl() {
 		$http     = new Http();
-		$response = unserialize( $http->post( 'https://gravityapi.com/wp-content/plugins/gravitymanager/api.php?op=get_plugin&slug=' . $this->slug . '&key=' . getenv( 'GRAVITY_FORMS_KEY' ) ) );
+		$response = unserialize( $http->post( 'https://gravityapi.com/wp-content/plugins/gravitymanager/api.php', array(
+			'op'   => 'get_plugin',
+			'slug' => $this->slug,
+			'key'  => getenv( 'GRAVITY_FORMS_KEY' ),
+		) ) );
 
 		if ( empty( $response['download_url_latest'] ) || ! is_string( $response['download_url_latest'] ) ) {
 			throw new UnexpectedValueException( sprintf(
