@@ -21,7 +21,7 @@ class PolylangPro extends AbstractEddPlugin {
 	 */
 	public function getDownloadUrl() {
 		$http     = new Http();
-		$response = json_decode( $http->post( 'https://polylang.pro', array(
+		$response = json_decode( $http->get( 'https://polylang.pro', array(
 			'edd_action' => 'get_version',
 			'license'    => getenv( 'POLYLANG_PRO_KEY' ),
 			'item_name'  => 'Polylang Pro',
