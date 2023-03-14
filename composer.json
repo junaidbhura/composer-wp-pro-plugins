@@ -15,8 +15,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Junaidbhura\\Composer\\WPProPlugins\\": "",
-      "Junaidbhura\\Composer\\WPProPlugins\\Plugins\\": "plugins"
+      "Junaidbhura\\Composer\\WPProPlugins\\": "src/"
     }
   },
   "extra": {
