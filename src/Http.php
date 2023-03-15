@@ -15,11 +15,11 @@ class Http {
 	/**
 	 * POST request.
 	 *
-	 * @param string $url Url to POST.
-	 * @param array  $args Arguments to POST.
+	 * @param  string                $url  URL to POST.
+	 * @param  array<string, mixed>  $args Arguments to POST.
 	 * @return mixed
 	 */
-	public function post( $url = '', $args = array() ) {
+	public function post( $url = '', array $args = array() ) {
 		$curl_handle = curl_init();
 		curl_setopt( $curl_handle, CURLOPT_URL, $url );
 		curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, 1 );
@@ -39,11 +39,11 @@ class Http {
 	/**
 	 * GET request.
 	 *
-	 * @param string $url Base URL for requeset (without params)
-	 * @param array  $args Arguments to add to request
+	 * @param  string                $url  URL to GET (without params).
+	 * @param  array<string, mixed>  $args Arguments to add to request.
 	 * @return mixed
 	 */
-	public function get( $url = '', $args = array() ) {
+	public function get( $url = '', array $args = array() ) {
 		$query_string = '';
 
 		$curl_handle = curl_init();

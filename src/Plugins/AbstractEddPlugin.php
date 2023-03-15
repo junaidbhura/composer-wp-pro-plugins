@@ -36,7 +36,7 @@ abstract class AbstractEddPlugin extends AbstractPlugin {
 			) );
 		}
 
-		if ( ! Semver::satisfies( $response['new_version'], $this->version ) ) {
+		if ( ! Semver::satisfies( (string) $response['new_version'], $this->version ) ) {
 			throw new UnexpectedValueException( sprintf(
 				'Expected download version (%s) to match installed version (%s) of package %s',
 				$response['new_version'],
