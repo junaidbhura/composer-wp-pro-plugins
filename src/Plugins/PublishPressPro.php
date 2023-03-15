@@ -8,6 +8,7 @@
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
 use Junaidbhura\Composer\WPProPlugins\Http;
+use InvalidArgumentException;
 use UnexpectedValueException;
 
 /**
@@ -28,6 +29,8 @@ class PublishPressPro extends AbstractEddPlugin {
 	/**
 	 * Get the download URL for this plugin.
 	 *
+	 * @throws InvalidArgumentException If the package is unsupported.
+	 * @throws UnexpectedValueException If the response is invalid.
 	 * @return string
 	 */
 	public function getDownloadUrl() {
@@ -89,7 +92,7 @@ class PublishPressPro extends AbstractEddPlugin {
 				break;
 
 			default:
-				throw new UnexpectedValueException( sprintf(
+				throw new InvalidArgumentException( sprintf(
 					'Could not find a matching package for %s. Check the package spelling and that the package is supported',
 					'junaidbhura/' . $this->slug
 				) );
@@ -111,6 +114,13 @@ class PublishPressPro extends AbstractEddPlugin {
 			'url'        => $url,
 			'version'    => $this->version,
 		) ), true );
+
+		if ( ! is_array( $response ) ) {
+			throw new UnexpectedValueException( sprintf(
+				'Expected a JSON object from API for package %s',
+				'junaidbhura/' . $this->slug
+			) );
+		}
 
 		return $this->extractDownloadUrl( $response );
 	}

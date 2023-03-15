@@ -19,26 +19,27 @@ abstract class AbstractEddPlugin extends AbstractPlugin {
 	 * Get the download URL for this plugin.
 	 *
 	 * @param  array<string, mixed> $response The EDD API response.
+	 * @throws UnexpectedValueException If the response is invalid or versions do not match.
 	 * @return string
 	 */
 	protected function extractDownloadUrl( array $response ) {
 		if ( empty( $response['download_link'] ) || ! is_string( $response['download_link'] ) ) {
 			throw new UnexpectedValueException( sprintf(
-				'Expected a valid download URL for package %s',
+				'Expected a valid download URL from API for package %s',
 				'junaidbhura/' . $this->slug
 			) );
 		}
 
 		if ( empty( $response['new_version'] ) || ! is_scalar( $response['new_version'] ) ) {
 			throw new UnexpectedValueException( sprintf(
-				'Expected a valid download version number for package %s',
+				'Expected a valid download version number from API for package %s',
 				'junaidbhura/' . $this->slug
 			) );
 		}
 
 		if ( ! Semver::satisfies( $response['new_version'], $this->version ) ) {
 			throw new UnexpectedValueException( sprintf(
-				'Expected download version (%s) to match installed version (%s) of package %s',
+				'Expected download version from API (%s) to match installed version (%s) of package %s',
 				$response['new_version'],
 				$this->version,
 				'junaidbhura/' . $this->slug
