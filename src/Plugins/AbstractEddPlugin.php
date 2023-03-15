@@ -19,6 +19,7 @@ abstract class AbstractEddPlugin extends AbstractPlugin {
 	 * Get the download URL for this plugin.
 	 *
 	 * @param  array<string, mixed> $response The EDD API response.
+	 * @throws UnexpectedValueException If the response is invalid or versions do not match.
 	 * @return string
 	 */
 	protected function extractDownloadUrl( array $response ) {
