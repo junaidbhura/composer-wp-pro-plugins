@@ -21,5 +21,8 @@
   "extra": {
     "class": "Junaidbhura\\Composer\\WPProPlugins\\Installer",
     "plugin-modifies-downloads": true
+  },
+  "scripts": {
+    "lint": "find src -type f -name '*.php' -print0 2> /dev/null | xargs -0 -n1 -P8 php -l 2> /dev/null | grep -v '^No syntax errors detected'; test $? -eq 1"
   }
 }
