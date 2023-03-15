@@ -1,25 +1,25 @@
 {
-  "name": "junaidbhura/composer-wp-pro-plugins",
-  "type": "composer-plugin",
-  "license": "MIT",
-  "require": {
-    "composer-plugin-api": "^1.0 || ^2.0",
-    "composer/semver": "^1.0 || ^2.0 || ^3.0",
-    "vlucas/phpdotenv": "^3.0 || ^4.0 || ^5.0"
-  },
-  "authors": [
-    {
-      "name": "Junaid Bhura",
-      "email": "info@junaidbhura.com"
-    }
-  ],
-  "autoload": {
-    "psr-4": {
-      "Junaidbhura\\Composer\\WPProPlugins\\": "src/"
-    }
-  },
-  "extra": {
-    "class": "Junaidbhura\\Composer\\WPProPlugins\\Installer",
-    "plugin-modifies-downloads": true
-  }
+	"name": "junaidbhura/composer-wp-pro-plugins",
+	"type": "composer-plugin",
+	"license": "MIT",
+	"require": {
+		"composer-plugin-api": "^1.0 || ^2.0",
+		"composer/semver": "^1.0 || ^2.0 || ^3.0",
+		"vlucas/phpdotenv": "^3.0 || ^4.0 || ^5.0"
+	},
+	"authors": [
+		{
+			"name": "Junaid Bhura",
+			"email": "info@junaidbhura.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Junaidbhura\\Composer\\WPProPlugins\\": "src/"
+		}
+	},
+	"extra": {
+		"class": "Junaidbhura\\Composer\\WPProPlugins\\Installer",
+		"plugin-modifies-downloads": true
+	}
 }

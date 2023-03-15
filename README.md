@@ -17,27 +17,31 @@ Sensitive credentials (license keys, tokens) are read from environment variables
 
 ## Overview
 
-> ⚠️ Note: Most EDD plugins, and Gravity Forms, only allow downloading the latest versions of their plugins, even if you request for a specific version.
+> ⚠️ Note: Most EDD plugins, and Gravity Forms, only allow downloading the latest versions
+> of their plugins, even if you request for a specific version.
 
-- Packages must use the names defined below otherwise they are ignored by this plugin.
-- When installing or updating a package, the package version is appended to the dist URL.
+* Packages must use the names defined below otherwise they are ignored by this plugin.
+* When installing or updating a package, the package version is appended to the dist URL.
   This versioned dist URL is used as the cache key to store ZIP archives of the package.
   In Composer 1, the versioned dist URL is added to `composer.lock`.
-- Before downloading the package, the package's real download URL is retrieved and formatted with their corresponding environment variables, as defined below.
+* Before downloading the package, the package's real download URL is retrieved and formatted
+  with their corresponding environment variables, as defined below.
   Environment variables will never be stored inside `composer.lock`.
-- If an environment variable can't be resolved, the download will fail and Composer will abort.
+* If an environment variable can't be resolved, the download will fail and Composer will abort.
 
 ## Usage
 
 This Composer plugin requires [Composer](https://getcomposer.org/):
 
-- 1.0.0 and newer, or
-- 2.0.2 and newer
-- 2.3+ IMPORTANT: Make sure to add trailing slashes to packages' `dist` URL as below. More info: https://github.com/junaidbhura/composer-wp-pro-plugins/issues/34
+* 1.0.0 and newer, or
+* 2.0.2 and newer
+* 2.3+ IMPORTANT: Make sure to add trailing slashes to packages' `dist` URL as below.
+  More info: https://github.com/junaidbhura/composer-wp-pro-plugins/issues/34
 
-Create a `.env` file in the root of your WordPress site, where the `composer.json` file lives, which has all the license keys and settings:
+Create a `.env` file in the root of your WordPress site, where the `composer.json` file lives,
+which has all the license keys and settings:
 
-```
+```shell
 ACF_PRO_KEY="<acf_pro_license_key>"
 ACFE_PRO_KEY="<acf_extended_pro_license_key>"
 ACFE_PRO_URL="<registered_url_for_acf_extended_pro>"
@@ -64,233 +68,233 @@ Add the following to your composer.json file:
 
 ```json
 "repositories": [
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/acf-extended-pro",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://www.acf-extended.com/"
-      },
-      "require": {
-          "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/advanced-custom-fields-pro",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://www.advancedcustomfields.com/"
-      },
-      "require": {
-          "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/gravityforms",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://www.gravityforms.com/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/gravityformspolls",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://www.gravityforms.com/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/ninja-forms-uploads",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://ninjaforms.com/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/polylang-pro",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://www.polylang.pro/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/publishpress-planner-pro",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://publishpress.com/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wp-all-import-pro",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://www.wpallimport.com/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wp-all-export-pro",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://www.wpallimport.com/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wpai-acf-add-on",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://www.wpallimport.com/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wpae-acf-add-on",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://www.wpallimport.com/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wpae-user-add-on-pro",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://www.wpallimport.com/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wpml-sitepress-multilingual-cms",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://wpml.org/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  },
-  {
-    "type": "package",
-    "package": {
-      "name": "junaidbhura/wpml-string-translation",
-      "version": "<version_number>",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://wpml.org/"
-      },
-      "require": {
-        "junaidbhura/composer-wp-pro-plugins": "*"
-      }
-    }
-  }
+	{
+		"type": "package",
+		"package": {
+			"name": "junaidbhura/acf-extended-pro",
+			"version": "<version_number>",
+			"type": "wordpress-plugin",
+			"dist": {
+				"type": "zip",
+				"url": "https://www.acf-extended.com/"
+			},
+			"require": {
+				"junaidbhura/composer-wp-pro-plugins": "*"
+			}
+		}
+	},
+	{
+		"type": "package",
+		"package": {
+			"name": "junaidbhura/advanced-custom-fields-pro",
+			"version": "<version_number>",
+			"type": "wordpress-plugin",
+			"dist": {
+				"type": "zip",
+				"url": "https://www.advancedcustomfields.com/"
+			},
+			"require": {
+				"junaidbhura/composer-wp-pro-plugins": "*"
+			}
+		}
+	},
+	{
+		"type": "package",
+		"package": {
+			"name": "junaidbhura/gravityforms",
+			"version": "<version_number>",
+			"type": "wordpress-plugin",
+			"dist": {
+				"type": "zip",
+				"url": "https://www.gravityforms.com/"
+			},
+			"require": {
+				"junaidbhura/composer-wp-pro-plugins": "*"
+			}
+		}
+	},
+	{
+		"type": "package",
+		"package": {
+			"name": "junaidbhura/gravityformspolls",
+			"version": "<version_number>",
+			"type": "wordpress-plugin",
+			"dist": {
+				"type": "zip",
+				"url": "https://www.gravityforms.com/"
+			},
+			"require": {
+				"junaidbhura/composer-wp-pro-plugins": "*"
+			}
+		}
+	},
+	{
+		"type": "package",
+		"package": {
+			"name": "junaidbhura/ninja-forms-uploads",
+			"version": "<version_number>",
+			"type": "wordpress-plugin",
+			"dist": {
+				"type": "zip",
+				"url": "https://ninjaforms.com/"
+			},
+			"require": {
+				"junaidbhura/composer-wp-pro-plugins": "*"
+			}
+		}
+	},
+	{
+		"type": "package",
+		"package": {
+			"name": "junaidbhura/polylang-pro",
+			"version": "<version_number>",
+			"type": "wordpress-plugin",
+			"dist": {
+				"type": "zip",
+				"url": "https://www.polylang.pro/"
+			},
+			"require": {
+				"junaidbhura/composer-wp-pro-plugins": "*"
+			}
+		}
+	},
+	{
+		"type": "package",
+		"package": {
+			"name": "junaidbhura/publishpress-planner-pro",
+			"version": "<version_number>",
+			"type": "wordpress-plugin",
+			"dist": {
+				"type": "zip",
+				"url": "https://publishpress.com/"
+			},
+			"require": {
+				"junaidbhura/composer-wp-pro-plugins": "*"
+			}
+		}
+	},
+	{
+		"type": "package",
+		"package": {
+			"name": "junaidbhura/wp-all-import-pro",
+			"version": "<version_number>",
+			"type": "wordpress-plugin",
+			"dist": {
+				"type": "zip",
+				"url": "https://www.wpallimport.com/"
+			},
+			"require": {
+				"junaidbhura/composer-wp-pro-plugins": "*"
+			}
+		}
+	},
+	{
+		"type": "package",
+		"package": {
+			"name": "junaidbhura/wp-all-export-pro",
+			"version": "<version_number>",
+			"type": "wordpress-plugin",
+			"dist": {
+				"type": "zip",
+				"url": "https://www.wpallimport.com/"
+			},
+			"require": {
+				"junaidbhura/composer-wp-pro-plugins": "*"
+			}
+		}
+	},
+	{
+		"type": "package",
+		"package": {
+			"name": "junaidbhura/wpai-acf-add-on",
+			"version": "<version_number>",
+			"type": "wordpress-plugin",
+			"dist": {
+				"type": "zip",
+				"url": "https://www.wpallimport.com/"
+			},
+			"require": {
+				"junaidbhura/composer-wp-pro-plugins": "*"
+			}
+		}
+	},
+	{
+		"type": "package",
+		"package": {
+			"name": "junaidbhura/wpae-acf-add-on",
+			"version": "<version_number>",
+			"type": "wordpress-plugin",
+			"dist": {
+				"type": "zip",
+				"url": "https://www.wpallimport.com/"
+			},
+			"require": {
+				"junaidbhura/composer-wp-pro-plugins": "*"
+			}
+		}
+	},
+	{
+		"type": "package",
+		"package": {
+			"name": "junaidbhura/wpae-user-add-on-pro",
+			"version": "<version_number>",
+			"type": "wordpress-plugin",
+			"dist": {
+				"type": "zip",
+				"url": "https://www.wpallimport.com/"
+			},
+			"require": {
+				"junaidbhura/composer-wp-pro-plugins": "*"
+			}
+		}
+	},
+	{
+		"type": "package",
+		"package": {
+			"name": "junaidbhura/wpml-sitepress-multilingual-cms",
+			"version": "<version_number>",
+			"type": "wordpress-plugin",
+			"dist": {
+				"type": "zip",
+				"url": "https://wpml.org/"
+			},
+			"require": {
+				"junaidbhura/composer-wp-pro-plugins": "*"
+			}
+		}
+	},
+	{
+		"type": "package",
+		"package": {
+			"name": "junaidbhura/wpml-string-translation",
+			"version": "<version_number>",
+			"type": "wordpress-plugin",
+			"dist": {
+				"type": "zip",
+				"url": "https://wpml.org/"
+			},
+			"require": {
+				"junaidbhura/composer-wp-pro-plugins": "*"
+			}
+		}
+	}
 ],
 "require": {
-  "junaidbhura/acf-extended-pro": "*",
-  "junaidbhura/advanced-custom-fields-pro": "*",
-  "junaidbhura/gravityforms": "*",
-  "junaidbhura/gravityformspolls": "*",
-  "junaidbhura/ninja-forms-uploads": "*",
-  "junaidbhura/polylang-pro": "*",
-  "junaidbhura/publishpress-planner-pro": "*",
-  "junaidbhura/wp-all-import-pro": "*",
-  "junaidbhura/wp-all-export-pro": "*",
-  "junaidbhura/wpai-acf-add-on": "*",
-  "junaidbhura/wpae-acf-add-on": "*",
-  "junaidbhura/wpae-user-add-on-pro": "*",
-  "junaidbhura/wpml-sitepress-multilingual-cms": "*",
-  "junaidbhura/wpml-string-translation": "*"
-},
+	"junaidbhura/acf-extended-pro": "*",
+	"junaidbhura/advanced-custom-fields-pro": "*",
+	"junaidbhura/gravityforms": "*",
+	"junaidbhura/gravityformspolls": "*",
+	"junaidbhura/ninja-forms-uploads": "*",
+	"junaidbhura/polylang-pro": "*",
+	"junaidbhura/publishpress-planner-pro": "*",
+	"junaidbhura/wp-all-import-pro": "*",
+	"junaidbhura/wp-all-export-pro": "*",
+	"junaidbhura/wpai-acf-add-on": "*",
+	"junaidbhura/wpae-acf-add-on": "*",
+	"junaidbhura/wpae-user-add-on-pro": "*",
+	"junaidbhura/wpml-sitepress-multilingual-cms": "*",
+	"junaidbhura/wpml-string-translation": "*"
+}
 ```
 
 ### Gravity Forms Add-Ons
@@ -303,7 +307,7 @@ For example:
 
 `junaidbhura/gravityformspolls`
 
-Here's a list of all Gravity Forms add-on slugs: [https://docs.gravityforms.com/gravity-forms-add-on-slugs/](https://docs.gravityforms.com/gravity-forms-add-on-slugs/)
+Consult the [list of all Gravity Forms add-on slugs](https://docs.gravityforms.com/gravity-forms-add-on-slugs/)
 
 ### Ninja Forms Add-Ons
 

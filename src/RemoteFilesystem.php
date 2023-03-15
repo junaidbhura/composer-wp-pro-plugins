@@ -15,34 +15,34 @@ use Composer\IO\IOInterface;
  */
 class RemoteFilesystem extends \Composer\Util\RemoteFilesystem {
 
-    /**
-     * Override original fileUrl.
-     *
-     * @access protected
-     * @var string
-     */
-    protected $fileUrl;
+	/**
+	 * Override original fileUrl.
+	 *
+	 * @access protected
+	 * @var string
+	 */
+	protected $fileUrl;
 
-     /**
-      * Constructor.
-      *
-      * @access public
-      * @param string      $fileUrl The url that should be used instead of fileurl
-      * @param IOInterface $io      The IO instance
-      * @param Config      $config  The config
-      * @param array       $options The options
-      * @param bool        $disableTls
-      */
-    public function __construct(
-        $fileUrl,
-        IOInterface $io,
-        Config $config = null,
-        array $options = [],
-        $disableTls = false
-    ) {
-        $this->fileUrl = $fileUrl;
-        parent::__construct( $io, $config, $options, $disableTls );
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @access public
+	 * @param string      $fileUrl The url that should be used instead of fileurl
+	 * @param IOInterface $io      The IO instance
+	 * @param Config      $config  The config
+	 * @param array       $options The options
+	 * @param bool        $disableTls
+	 */
+	public function __construct(
+		$fileUrl,
+		IOInterface $io,
+		Config $config = null,
+		array $options = [],
+		$disableTls = false
+	) {
+		$this->fileUrl = $fileUrl;
+		parent::__construct( $io, $config, $options, $disableTls );
+	}
 
 	/**
 	 * Copy the remote file to local.
@@ -53,21 +53,21 @@ class RemoteFilesystem extends \Composer\Util\RemoteFilesystem {
 	 * @param bool   $progress  Display the progression
 	 * @param array  $options   Additional context options
 	 * @return bool true
-     */
-    public function copy(
-        $originUrl,
-        $fileUrl,
-        $fileName,
-        $progress = true,
-        $options = []
-    ) {
-        return parent::copy(
-            $originUrl,
-            $this->fileUrl,
-            $fileName,
-            $progress,
-            $options
-        );
-    }
+	 */
+	public function copy(
+		$originUrl,
+		$fileUrl,
+		$fileName,
+		$progress = true,
+		$options = []
+	) {
+		return parent::copy(
+			$originUrl,
+			$this->fileUrl,
+			$fileName,
+			$progress,
+			$options
+		);
+	}
 
 }
