@@ -7,6 +7,10 @@
     "composer/semver": "^1.0 || ^2.0 || ^3.0",
     "vlucas/phpdotenv": "^3.0 || ^4.0 || ^5.0"
   },
+  "require-dev": {
+    "composer/composer": "^1.0.0 || ^2.0.0",
+    "phpstan/phpstan": "^1.10"
+  },
   "authors": [
     {
       "name": "Junaid Bhura",
@@ -23,6 +27,7 @@
     "plugin-modifies-downloads": true
   },
   "scripts": {
-    "lint": "find src -type f -name '*.php' -print0 2> /dev/null | xargs -0 -n1 -P8 php -l 2> /dev/null | grep -v '^No syntax errors detected'; test $? -eq 1"
+    "lint": "find src -type f -name '*.php' -print0 2> /dev/null | xargs -0 -n1 -P8 php -l 2> /dev/null | grep -v '^No syntax errors detected'; test $? -eq 1",
+    "analyze": "phpstan analyse"
   }
 }
