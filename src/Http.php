@@ -7,6 +7,8 @@
 
 namespace Junaidbhura\Composer\WPProPlugins;
 
+use UnexpectedValueException;
+
 /**
  * Http class.
  */
@@ -17,7 +19,7 @@ class Http {
 	 *
 	 * @param  string                $url  URL to POST.
 	 * @param  array<string, mixed>  $args Arguments to POST.
-	 * @return mixed
+	 * @return string
 	 */
 	public function post( $url = '', array $args = array() ) {
 		$curl_handle = curl_init();
@@ -30,10 +32,8 @@ class Http {
 		if ( ! empty( $args ) ) {
 			curl_setopt( $curl_handle, CURLOPT_POSTFIELDS, http_build_query( $args, '', '&' ) );
 		}
-		$response = curl_exec( $curl_handle );
-		curl_close( $curl_handle );
 
-		return $response;
+		return $this->request( $curl_handle );
 	}
 
 	/**
@@ -41,7 +41,7 @@ class Http {
 	 *
 	 * @param  string                $url  URL to GET (without params).
 	 * @param  array<string, mixed>  $args Arguments to add to request.
-	 * @return mixed
+	 * @return string
 	 */
 	public function get( $url = '', array $args = array() ) {
 		$query_string = '';
@@ -53,8 +53,33 @@ class Http {
 			$query_string = http_build_query( $args, '', '&' );
 		}
 		curl_setopt( $curl_handle, CURLOPT_URL, $url . '?' . $query_string );
+
+		return $this->request( $curl_handle );
+	}
+
+	/**
+	 * @param  \CurlHandle|resource $curl_handle The cURL handler.
+	 * @throws UnexpectedValueException If the request failed or the response is invalid.
+	 * @return string
+	 */
+	protected function request( $curl_handle ) {
 		$response = curl_exec( $curl_handle );
+		$curl_errno = curl_errno( $curl_handle );
 		curl_close( $curl_handle );
+
+		if ( false === $response ) {
+			throw new UnexpectedValueException( sprintf(
+				'cURL error (%d): %s',
+				$curl_errno,
+				curl_strerror( $curl_errno )
+			) );
+		}
+
+		if ( ! is_string( $response ) || 0 === strlen( $response ) ) {
+			throw new UnexpectedValueException(
+				'cURL error: Empty response body'
+			);
+		}
 
 		return $response;
 	}
