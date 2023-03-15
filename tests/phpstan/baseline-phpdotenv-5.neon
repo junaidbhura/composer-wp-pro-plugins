@@ -1,0 +1,11 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Parameter \\#1 \\$repository of static method Dotenv\\\\Dotenv\\:\\:create\\(\\) expects Dotenv\\\\Repository\\\\RepositoryInterface, string given\\.$#"
+			count: 1
+			path: ../../src/Installer.php
+
+		-
+			message: "#^Static method Dotenv\\\\Dotenv\\:\\:create\\(\\) invoked with 1 parameter, 2\\-5 required\\.$#"
+			count: 1
+			path: ../../src/Installer.php

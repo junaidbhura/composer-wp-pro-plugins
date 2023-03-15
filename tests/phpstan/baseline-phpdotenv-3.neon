@@ -1,0 +1,11 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined static method Dotenv\\\\Dotenv\\:\\:createImmutable\\(\\)\\.$#"
+			count: 1
+			path: ../../src/Installer.php
+
+		-
+			message: "#^Call to an undefined static method Dotenv\\\\Dotenv\\:\\:createUnsafeImmutable\\(\\)\\.$#"
+			count: 1
+			path: ../../src/Installer.php

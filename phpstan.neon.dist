@@ -1,3 +1,5 @@
+includes:
+	- tests/phpstan/ignore-errors-by-installed-versions.neon.php
 parameters:
 	level: max
 	paths:

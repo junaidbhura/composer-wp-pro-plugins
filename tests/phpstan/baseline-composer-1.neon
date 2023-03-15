@@ -1,0 +1,41 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined method Composer\\\\Plugin\\\\PreFileDownloadEvent\\:\\:getContext\\(\\)\\.$#"
+			count: 1
+			path: ../../src/Installer.php
+
+		-
+			message: "#^Call to an undefined method Composer\\\\Plugin\\\\PreFileDownloadEvent\\:\\:getType\\(\\)\\.$#"
+			count: 1
+			path: ../../src/Installer.php
+
+		-
+			message: "#^Call to an undefined method Composer\\\\Plugin\\\\PreFileDownloadEvent\\:\\:setCustomCacheKey\\(\\)\\.$#"
+			count: 1
+			path: ../../src/Installer.php
+
+		-
+			message: "#^Call to an undefined method Composer\\\\Plugin\\\\PreFileDownloadEvent\\:\\:setProcessedUrl\\(\\)\\.$#"
+			count: 1
+			path: ../../src/Installer.php
+
+		-
+			message: "#^Call to an undefined method Composer\\\\DependencyResolver\\\\Operation\\\\OperationInterface\\:\\:getPackage\\(\\)\\.$#"
+			count: 1
+			path: ../../src/Installer.php
+
+		-
+			message: "#^Call to an undefined method Composer\\\\DependencyResolver\\\\Operation\\\\OperationInterface\\:\\:getTargetPackage\\(\\)\\.$#"
+			count: 1
+			path: ../../src/Installer.php
+
+		-
+			message: "#^If condition is always true\\.$#"
+			count: 1
+			path: ../../src/Installer.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: ../../src/Installer.php

@@ -1,0 +1,31 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^If condition is always false\\.$#"
+			count: 1
+			path: ../../src/Installer.php
+
+		-
+			message: "#^Call to an undefined method Composer\\\\DependencyResolver\\\\Operation\\\\OperationInterface\\:\\:getJobType\\(\\)\\.$#"
+			count: 1
+			path: ../../src/Installer.php
+
+		-
+			message: "#^Call to an undefined method Composer\\\\DependencyResolver\\\\Operation\\\\OperationInterface\\:\\:getPackage\\(\\)\\.$#"
+			count: 1
+			path: ../../src/Installer.php
+
+		-
+			message: "#^Call to an undefined method Composer\\\\DependencyResolver\\\\Operation\\\\OperationInterface\\:\\:getTargetPackage\\(\\)\\.$#"
+			count: 1
+			path: ../../src/Installer.php
+
+		-
+			message: "#^Call to an undefined method Composer\\\\Plugin\\\\PreFileDownloadEvent\\:\\:getRemoteFilesystem\\(\\)\\.$#"
+			count: 1
+			path: ../../src/Installer.php
+
+		-
+			message: "#^Call to an undefined method Composer\\\\Plugin\\\\PreFileDownloadEvent\\:\\:setRemoteFilesystem\\(\\)\\.$#"
+			count: 1
+			path: ../../src/Installer.php
