@@ -95,13 +95,11 @@ class PublishPressPro extends AbstractEddPlugin {
 				) );
 		}
 
-		if ( $env ) {
-			/**
-			 * Use add-on licensing if available, otherwise use membership licensing.
-			 */
-			$license = ( getenv( "PUBLISHPRESS_{$env}_PRO_KEY" ) ?: $license );
-			$url     = ( getenv( "PUBLISHPRESS_{$env}_PRO_URL" ) ?: $url );
-		}
+		/**
+		 * Use add-on licensing if available, otherwise use membership licensing.
+		 */
+		$license = ( getenv( "PUBLISHPRESS_{$env}_PRO_KEY" ) ?: $license );
+		$url     = ( getenv( "PUBLISHPRESS_{$env}_PRO_URL" ) ?: $url );
 
 		$http     = new Http();
 		$response = json_decode( $http->get( 'https://publishpress.com', array(

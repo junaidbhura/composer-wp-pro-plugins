@@ -30,6 +30,7 @@ abstract class AbstractPlugin {
 	 * AbstractPlugin constructor.
 	 *
 	 * @param string $version
+	 * @param string $slug
 	 */
 	public function __construct( $version = '', $slug = '' ) {
 		$this->version = $version;
