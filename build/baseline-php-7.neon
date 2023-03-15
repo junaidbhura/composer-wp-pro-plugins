@@ -1,0 +1,21 @@
+parameters:
+  ignoreErrors:
+    -
+      message: "#^Parameter \\#1 \\$ch of function curl_close expects resource, CurlHandle\\|resource given\\.$#"
+      count: 1
+      path: ../src/Http.php
+
+    -
+      message: "#^Parameter \\#1 \\$ch of function curl_errno expects resource, CurlHandle\\|resource given\\.$#"
+      count: 1
+      path: ../src/Http.php
+
+    -
+      message: "#^Parameter \\#1 \\$ch of function curl_exec expects resource, CurlHandle\\|resource given\\.$#"
+      count: 1
+      path: ../src/Http.php
+
+    -
+      message: "#^Parameter \\$curl_handle of method Junaidbhura\\\\Composer\\\\WPProPlugins\\\\Http\\:\\:request\\(\\) has invalid type CurlHandle\\.$#"
+      count: 1
+      path: ../src/Http.php

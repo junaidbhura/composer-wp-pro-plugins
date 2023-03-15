@@ -1,0 +1,16 @@
+parameters:
+  ignoreErrors:
+    -
+      message: "#^Parameter \\#1 \\$handle of function curl_close expects CurlHandle, CurlHandle\\|resource given\\.$#"
+      count: 1
+      path: ../src/Http.php
+
+    -
+      message: "#^Parameter \\#1 \\$handle of function curl_errno expects CurlHandle, CurlHandle\\|resource given\\.$#"
+      count: 1
+      path: ../src/Http.php
+
+    -
+      message: "#^Parameter \\#1 \\$handle of function curl_exec expects CurlHandle, CurlHandle\\|resource given\\.$#"
+      count: 1
+      path: ../src/Http.php
