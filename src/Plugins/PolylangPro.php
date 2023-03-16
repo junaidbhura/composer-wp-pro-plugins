@@ -8,7 +8,6 @@
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
 use Junaidbhura\Composer\WPProPlugins\Http;
-use UnexpectedValueException;
 
 /**
  * PolylangPro class.
@@ -16,29 +15,20 @@ use UnexpectedValueException;
 class PolylangPro extends AbstractEddPlugin {
 
 	/**
-	 * Get the download URL for this plugin.
+	 * Get the download URL for this plugin from its API.
 	 *
-	 * @throws UnexpectedValueException If the response is invalid.
 	 * @return string
 	 */
-	public function getDownloadUrl() {
-		$http     = new Http();
-		$response = json_decode( $http->get( 'https://polylang.pro', array(
+	protected function getDownloadUrlFromApi() {
+		$http = new Http();
+
+		return $http->get( 'https://polylang.pro', array(
 			'edd_action' => 'get_version',
 			'license'    => getenv( 'POLYLANG_PRO_KEY' ),
 			'item_name'  => 'Polylang Pro',
 			'url'        => getenv( 'POLYLANG_PRO_URL' ),
 			'version'    => $this->version,
-		) ), true );
-
-		if ( ! is_array( $response ) ) {
-			throw new UnexpectedValueException( sprintf(
-				'Expected a JSON object from API for package %s',
-				'junaidbhura/' . $this->slug
-			) );
-		}
-
-		return $this->extractDownloadUrl( $response );
+		) );
 	}
 
 }

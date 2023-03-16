@@ -8,6 +8,7 @@
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
 use Junaidbhura\Composer\WPProPlugins\Http;
+use RuntimeException;
 use UnexpectedValueException;
 
 /**
@@ -32,12 +33,25 @@ class GravityForms extends AbstractPlugin {
 	 * @return string
 	 */
 	public function getDownloadUrl() {
-		$http     = new Http();
-		$response = unserialize( $http->get( 'https://gravityapi.com/wp-content/plugins/gravitymanager/api.php', array(
-			'op'   => 'get_plugin',
-			'slug' => $this->slug,
-			'key'  => getenv( 'GRAVITY_FORMS_KEY' ),
-		) ) );
+		$http = new Http();
+
+		try {
+			$response = unserialize( $http->get( 'https://gravityapi.com/wp-content/plugins/gravitymanager/api.php', array(
+				'op'   => 'get_plugin',
+				'slug' => $this->slug,
+				'key'  => getenv( 'GRAVITY_FORMS_KEY' ),
+			) ) );
+		} catch ( RuntimeException $e ) {
+			$details = $e->getMessage();
+			if ( $details ) {
+				$details = PHP_EOL . $details;
+			}
+
+			throw new UnexpectedValueException( sprintf(
+				'Could not query API for package %s. Please try again later.' . $details,
+				'junaidbhura/' . $this->slug
+			) );
+		}
 
 		if ( ! is_array( $response ) ) {
 			throw new UnexpectedValueException( sprintf(

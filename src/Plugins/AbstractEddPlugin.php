@@ -8,6 +8,7 @@
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
 use Composer\Semver\Semver;
+use RuntimeException;
 use UnexpectedValueException;
 
 /**
@@ -16,13 +17,40 @@ use UnexpectedValueException;
 abstract class AbstractEddPlugin extends AbstractPlugin {
 
 	/**
-	 * Get the download URL for this plugin.
+	 * Get the download URL for this plugin from its API.
 	 *
-	 * @param  array<string, mixed> $response The EDD API response.
-	 * @throws UnexpectedValueException If the response is invalid or versions do not match.
 	 * @return string
 	 */
-	protected function extractDownloadUrl( array $response ) {
+	abstract protected function getDownloadUrlFromApi();
+
+	/**
+	 * Get the download URL for this plugin.
+	 *
+	 * @throws UnexpectedValueException If the response is invalid.
+	 * @return string
+	 */
+	public function getDownloadUrl() {
+		try {
+			$response = json_decode( $this->getDownloadUrlFromApi(), true );
+		} catch ( RuntimeException $e ) {
+			$details = $e->getMessage();
+			if ( $details ) {
+				$details = PHP_EOL . $details;
+			}
+
+			throw new UnexpectedValueException( sprintf(
+				'Could not query API for package %s. Please try again later.' . $details,
+				'junaidbhura/' . $this->slug
+			) );
+		}
+
+		if ( ! is_array( $response ) ) {
+			throw new UnexpectedValueException( sprintf(
+				'Expected a JSON object from API for package %s',
+				'junaidbhura/' . $this->slug
+			) );
+		}
+
 		if ( empty( $response['download_link'] ) || ! is_string( $response['download_link'] ) ) {
 			throw new UnexpectedValueException( sprintf(
 				'Expected a valid download URL from API for package %s',

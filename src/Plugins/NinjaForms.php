@@ -9,7 +9,6 @@ namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
 use Junaidbhura\Composer\WPProPlugins\Http;
 use InvalidArgumentException;
-use UnexpectedValueException;
 
 /**
  * NinjaForms class.
@@ -17,13 +16,12 @@ use UnexpectedValueException;
 class NinjaForms extends AbstractEddPlugin {
 
 	/**
-	 * Get the download URL for this plugin.
+	 * Get the download URL for this plugin from its API.
 	 *
 	 * @throws InvalidArgumentException If the package is unsupported.
-	 * @throws UnexpectedValueException If the response is invalid.
 	 * @return string
 	 */
-	public function getDownloadUrl() {
+	protected function getDownloadUrlFromApi() {
 		$name    = '';
 		$env     = null;
 		/**
@@ -313,23 +311,15 @@ class NinjaForms extends AbstractEddPlugin {
 			$url     = ( getenv( "NINJA_FORMS_{$env}_URL" ) ?: $url );
 		}
 
-		$http     = new Http();
-		$response = json_decode( $http->get( 'https://ninjaforms.com', array(
+		$http = new Http();
+
+		return $http->get( 'https://ninjaforms.com', array(
 			'edd_action' => 'get_version',
 			'license'    => $license,
 			'item_name'  => $name,
 			'url'        => $url,
 			'version'    => $this->version,
-		) ), true );
-
-		if ( ! is_array( $response ) ) {
-			throw new UnexpectedValueException( sprintf(
-				'Expected a JSON object from API for package %s',
-				'junaidbhura/' . $this->slug
-			) );
-		}
-
-		return $this->extractDownloadUrl( $response );
+		) );
 	}
 
 }
