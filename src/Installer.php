@@ -44,13 +44,14 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 	 *
 	 * @param Composer    $composer
 	 * @param IOInterface $io
+	 * @return void
 	 */
 	public function activate( Composer $composer, IOInterface $io ) {
 		$this->composer = $composer;
 		$this->io       = $io;
 
 		$path = getcwd();
-		if ( file_exists( $path . DIRECTORY_SEPARATOR . '.env' ) ) {
+		if ( is_string( $path ) && file_exists( $path . DIRECTORY_SEPARATOR . '.env' ) ) {
 			$this->loadDotenv( $path );
 		}
 	}
@@ -60,10 +61,10 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 	 *
 	 * @param Composer    $composer
 	 * @param IOInterface $io
+	 * @return void
 	 */
 	public function deactivate( Composer $composer, IOInterface $io ) {
-		$this->composer = null;
-		$this->io       = null;
+		// no need to deactivate anything
 	}
 
 	/**
@@ -71,6 +72,7 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 	 *
 	 * @param Composer    $composer
 	 * @param IOInterface $io
+	 * @return void
 	 */
 	public function uninstall( Composer $composer, IOInterface $io ) {
 		// no need to uninstall anything
@@ -80,6 +82,7 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 	 * Activate vlucas/phpdotenv, if available.
 	 *
 	 * @param string $path
+	 * @return void
 	 */
 	protected function loadDotenv( $path ) {
 		// Dotenv V5
@@ -107,10 +110,9 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 	/**
 	 * Set subscribed events.
 	 *
-	 * @return array
+	 * @return array<string, (string|array{string, int})>
 	 */
 	public static function getSubscribedEvents() {
-
 		if ( version_compare( PluginInterface::PLUGIN_API_VERSION, '2.0.0', '<' ) ) {
 			return array(
 				PackageEvents::PRE_PACKAGE_INSTALL => 'onPrePackageInstallOrUpdateInComposer1',
@@ -133,6 +135,7 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 	 * the package as a context.
 	 *
 	 * @param PackageEvent $event
+	 * @return void
 	 */
 	public function onPrePackageInstallOrUpdateInComposer1( PackageEvent $event ) {
 		$this->downloadUrl = null;
@@ -148,9 +151,11 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 		if ( ! empty( $download_url ) ) {
 			$this->downloadUrl = $download_url;
 
-			$dist_url     = $package->getDistUrl();
-			$filtered_url = $this->filterDistUrl( $dist_url, $package );
-			$package->setDistUrl( $filtered_url );
+			$dist_url = $package->getDistUrl();
+			if ( is_string( $dist_url ) ) {
+				$filtered_url = $this->filterDistUrl( $dist_url, $package );
+				$package->setDistUrl( $filtered_url );
+			}
 		}
 	}
 
@@ -160,6 +165,7 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 	 * In Composer v1, packages are downloaded, installed/updated, sequentially.
 	 *
 	 * @param PreFileDownloadEvent $event
+	 * @return void
 	 */
 	public function onPreFileDownloadInComposer1( PreFileDownloadEvent $event ) {
 		if ( empty( $this->downloadUrl ) ) {
@@ -184,6 +190,7 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 	 * then prepared, then installed/updated.
 	 *
 	 * @param PreFileDownloadEvent $event
+	 * @return void
 	 */
 	public function onPreFileDownloadInComposer2( PreFileDownloadEvent $event ) {
 		/**
@@ -195,7 +202,11 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 			return;
 		}
 
-		$package       = $event->getContext();
+		$package = $event->getContext();
+		if ( ! $package instanceof PackageInterface ) {
+			return;
+		}
+
 		$processed_url = $event->getProcessedUrl();
 		$download_url  = $this->getDownloadUrl( $package );
 
@@ -214,10 +225,10 @@ class Installer implements PluginInterface, EventSubscriberInterface {
 	 * The filtered dist URL is stored inside `composer.lock` and is used
 	 * to generate the cache key for the requested package version.
 	 *
-	 * @param string|null      $url
+	 * @param string           $url
 	 * @param PackageInterface $package
 	 *
-	 * @return string|null The filtered dist URL.
+	 * @return string The filtered dist URL.
 	 */
 	protected function filterDistUrl( $url, PackageInterface $package ) {
 		$package_key = sha1( $package->getUniqueName() );

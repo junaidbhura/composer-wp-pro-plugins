@@ -1,0 +1,17 @@
+# editorconfig.org
+
+root = true
+
+[*.php]
+charset = utf-8
+end_of_line = lf
+indent_style = tab
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{json,md,neon,neon.dist,yml,xml,xml.dist}]
+indent_size = 2
+indent_style = space
+
+[*.md]
+trim_trailing_whitespace = false

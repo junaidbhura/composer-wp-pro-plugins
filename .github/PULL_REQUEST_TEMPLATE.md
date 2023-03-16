@@ -1,4 +1,4 @@
-## Checklist:
+## Checklist
 - [ ] I've read the [Contributing page](https://github.com/junaidbhura/composer-wp-pro-plugins/blob/master/CONTRIBUTING.md).
 - [ ] I've created an issue and referenced it here.
 - [ ] My code is tested.
