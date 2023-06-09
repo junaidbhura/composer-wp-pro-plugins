@@ -44,34 +44,72 @@ class GravityForms extends AbstractPlugin {
 		$api_url = 'https://gravityapi.com/wp-content/plugins/gravitymanager/api.php';
 
 		try {
-			$response = unserialize( $http->get( $api_url, $api_query ) );
+			$response = $http->get( $api_url, $api_query );
 		} catch ( Exception $e ) {
-			$details = $e->getMessage();
-			if ( $details ) {
-				$details = PHP_EOL . $details;
+			$details = [];
+
+			$error = $e->getMessage();
+			if ( $error ) {
+				$details[] = 'HTTP Error: ' . $error;
 			}
 
-			throw new UnexpectedValueException( sprintf(
-				'Could not query API for package %s. Please try again later.' . $details,
+			$message = sprintf(
+				'Could not query API for package %s. Please try again later.',
 				$this->getPackageName()
-			) );
+			);
+
+			if ( $details ) {
+				$message .= PHP_EOL . PHP_EOL . implode( PHP_EOL . PHP_EOL, $details );
+			}
+
+			throw new UnexpectedValueException( $message );
 		}
 
-		if ( ! is_array( $response ) ) {
-			throw new UnexpectedValueException( sprintf(
-				'Expected a serialized object from API for package %s',
+		// Catch any throwables from objects in their unserialization handlers.
+		// Composer itself handles converting PHP notices into exceptions.
+		try {
+			/**
+			 * @todo When the Composer plugin drops support for PHP 5,
+			 *    use the `unserialize()` function's `allowed_classes` option,
+			 *    introduced in PHP 7, to disallow all classes.
+			 */
+			$data = unserialize( $response );
+
+			if ( $data !== false && ! is_array( $data ) ) {
+				throw new UnexpectedValueException(
+					'unserialize(): Expected a data structure'
+				);
+			}
+		} catch ( Exception $e ) {
+			$details = [
+				$e->getMessage(),
+			];
+
+			$response_length = mb_strlen( $response );
+			if ( $response_length > 0 ) {
+				$details[] = '    ' . mb_substr( $response, 0, 100 ) . ( $response_length > 100 ? '...' : '' );
+			}
+
+			$message = sprintf(
+				'Expected a data structure from API for package %s.',
 				$this->getPackageName()
-			) );
+			);
+
+			if ( $details ) {
+				$message .= PHP_EOL . PHP_EOL . implode( PHP_EOL . PHP_EOL, $details );
+			}
+
+			throw new UnexpectedValueException( $message );
 		}
 
-		if ( empty( $response['download_url_latest'] ) || ! is_string( $response['download_url_latest'] ) ) {
+		if ( empty( $data['download_url_latest'] ) || ! is_string( $data['download_url_latest'] ) ) {
 			throw new UnexpectedValueException( sprintf(
 				'Expected a valid download URL for package %s',
 				$this->getPackageName()
 			) );
 		}
 
-		return str_replace( 'http://', 'https://', $response['download_url_latest'] );
+		return str_replace( 'http://', 'https://', $data['download_url_latest'] );
 	}
 
 }
