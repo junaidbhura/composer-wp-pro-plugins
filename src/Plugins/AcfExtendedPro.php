@@ -15,21 +15,28 @@ use Junaidbhura\Composer\WPProPlugins\Http;
 class AcfExtendedPro extends AbstractEddPlugin {
 
 	/**
-	 * Get the download URL for this plugin.
+	 * Get the download URL for this plugin from its API.
 	 *
 	 * @return string
 	 */
-	public function getDownloadUrl() {
-		$http     = new Http();
-		$response = json_decode( $http->post( 'https://acf-extended.com', array(
+	protected function getDownloadUrlFromApi() {
+		$http = new Http();
+
+		$api_query = array(
 			'edd_action' => 'get_version',
 			'license'    => getenv( 'ACFE_PRO_KEY' ),
 			'item_name'  => 'ACF Extended Pro',
 			'url'        => getenv( 'ACFE_PRO_URL' ),
-			'version'    => $this->version,
-		) ), true );
+		);
 
-		return $this->extractDownloadUrl( $response );
+		// If no version is specified, we are fetching the latest version.
+		if ( $this->version ) {
+			$api_query['version'] = $this->version;
+		}
+
+		$api_url = 'https://acf-extended.com';
+
+		return $http->get( $api_url, $api_query );
 	}
 
 }

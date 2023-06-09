@@ -15,14 +15,14 @@ abstract class AbstractPlugin {
 	/**
 	 * The version number of the plugin to download.
 	 *
-	 * @var string Version number.
+	 * @var string
 	 */
 	protected $version = '';
 
 	/**
-	 * The slug of which plugin to download.
+	 * The name of the plugin to download.
 	 *
-	 * @var string Plugin slug.
+	 * @var string
 	 */
 	protected $slug = '';
 
@@ -30,6 +30,7 @@ abstract class AbstractPlugin {
 	 * AbstractPlugin constructor.
 	 *
 	 * @param string $version
+	 * @param string $slug
 	 */
 	public function __construct( $version = '', $slug = '' ) {
 		$this->version = $version;
@@ -42,5 +43,14 @@ abstract class AbstractPlugin {
 	 * @return string
 	 */
 	abstract public function getDownloadUrl();
+
+	/**
+	 * Get the plugin's Composer package name with vendor.
+	 *
+	 * @return string
+	 */
+	protected function getPackageName() {
+		return 'junaidbhura/' . $this->slug;
+	}
 
 }

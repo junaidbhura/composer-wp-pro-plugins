@@ -8,7 +8,7 @@
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
 use Junaidbhura\Composer\WPProPlugins\Http;
-use UnexpectedValueException;
+use InvalidArgumentException;
 
 /**
  * PublishPressPro class.
@@ -26,11 +26,12 @@ class PublishPressPro extends AbstractEddPlugin {
 	}
 
 	/**
-	 * Get the download URL for this plugin.
+	 * Get the download URL for this plugin from its API.
 	 *
+	 * @throws InvalidArgumentException If the package is unsupported.
 	 * @return string
 	 */
-	public function getDownloadUrl() {
+	protected function getDownloadUrlFromApi() {
 		$id  = 0;
 		$env = null;
 		/**
@@ -89,9 +90,9 @@ class PublishPressPro extends AbstractEddPlugin {
 				break;
 
 			default:
-				throw new UnexpectedValueException( sprintf(
+				throw new InvalidArgumentException( sprintf(
 					'Could not find a matching package for %s. Check the package spelling and that the package is supported',
-					'junaidbhura/' . $this->slug
+					$this->getPackageName()
 				) );
 		}
 
@@ -103,16 +104,23 @@ class PublishPressPro extends AbstractEddPlugin {
 			$url     = ( getenv( "PUBLISHPRESS_{$env}_PRO_URL" ) ?: $url );
 		}
 
-		$http     = new Http();
-		$response = json_decode( $http->get( 'https://publishpress.com', array(
+		$http = new Http();
+
+		$api_query = array(
 			'edd_action' => 'get_version',
 			'license'    => $license,
 			'item_id'    => $id,
 			'url'        => $url,
-			'version'    => $this->version,
-		) ), true );
+		);
 
-		return $this->extractDownloadUrl( $response );
+		// If no version is specified, we are fetching the latest version.
+		if ( $this->version ) {
+			$api_query['version'] = $this->version;
+		}
+
+		$api_url = 'https://publishpress.com';
+
+		return $http->get( $api_url, $api_query );
 	}
 
 }

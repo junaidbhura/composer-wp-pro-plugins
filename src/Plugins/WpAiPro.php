@@ -25,11 +25,11 @@ class WpAiPro extends AbstractEddPlugin {
 	}
 
 	/**
-	 * Get the download URL for this plugin.
+	 * Get the download URL for this plugin from its API.
 	 *
 	 * @return string
 	 */
-	public function getDownloadUrl() {
+	protected function getDownloadUrlFromApi() {
 		$url     = '';
 		$name    = '';
 		$license = '';
@@ -75,16 +75,23 @@ class WpAiPro extends AbstractEddPlugin {
 			}
 		}
 
-		$http     = new Http();
-		$response = json_decode( $http->get( 'https://www.wpallimport.com', array(
+		$http = new Http();
+
+		$api_query = array(
 			'edd_action' => 'get_version',
 			'license'    => $license,
 			'item_name'  => $name,
 			'url'        => $url,
-			'version'    => $this->version,
-		) ), true );
+		);
 
-		return $this->extractDownloadUrl( $response );
+		// If no version is specified, we are fetching the latest version.
+		if ( $this->version ) {
+			$api_query['version'] = $this->version;
+		}
+
+		$api_url = 'https://www.wpallimport.com';
+
+		return $http->get( $api_url, $api_query );
 	}
 
 }

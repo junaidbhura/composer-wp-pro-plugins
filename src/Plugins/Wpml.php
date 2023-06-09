@@ -7,7 +7,7 @@
 
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
-use UnexpectedValueException;
+use InvalidArgumentException;
 
 /**
  * Wpml class.
@@ -27,6 +27,7 @@ class Wpml extends AbstractPlugin {
 	/**
 	 * Get the download URL for this plugin.
 	 *
+	 * @throws InvalidArgumentException If the package is unsupported.
 	 * @return string
 	 */
 	public function getDownloadUrl() {
@@ -51,13 +52,26 @@ class Wpml extends AbstractPlugin {
 		);
 
 		if ( ! array_key_exists( $this->slug, $packages ) ) {
-			throw new UnexpectedValueException( sprintf(
+			throw new InvalidArgumentException( sprintf(
 				'Could not find a matching package for %s. Check the package spelling and that the package is supported',
-				'junaidbhura/' . $this->slug
+				$this->getPackageName()
 			) );
 		}
 
-		return 'https://wpml.org/?download=' . $packages[ $this->slug ] . '&user_id=' . getenv( 'WPML_USER_ID' ) . '&subscription_key=' . getenv( 'WPML_KEY' ) . '&version=' . $this->version;
+		$api_query = array(
+			'download'         => $packages[ $this->slug ],
+			'user_id'          => getenv( 'WPML_USER_ID' ),
+			'subscription_key' => getenv( 'WPML_KEY' ),
+		);
+
+		// If no version is specified, we are fetching the latest version.
+		if ( $this->version ) {
+			$api_query['version'] = $this->version;
+		}
+
+		$api_url = 'https://wpml.org/';
+
+		return $api_url . '?' . http_build_query( $api_query, '', '&' );
 	}
 
 }
