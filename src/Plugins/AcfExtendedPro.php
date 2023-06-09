@@ -22,7 +22,7 @@ class AcfExtendedPro extends AbstractEddPlugin {
 	protected function getDownloadUrlFromApi() {
 		$http = new Http();
 
-		return $http->post( 'https://acf-extended.com', array(
+		return $http->get( 'https://acf-extended.com', array(
 			'edd_action' => 'get_version',
 			'license'    => getenv( 'ACFE_PRO_KEY' ),
 			'item_name'  => 'ACF Extended Pro',
