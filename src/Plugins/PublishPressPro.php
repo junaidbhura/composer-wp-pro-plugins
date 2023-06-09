@@ -92,7 +92,7 @@ class PublishPressPro extends AbstractEddPlugin {
 			default:
 				throw new InvalidArgumentException( sprintf(
 					'Could not find a matching package for %s. Check the package spelling and that the package is supported',
-					'junaidbhura/' . $this->slug
+					$this->getPackageName()
 				) );
 		}
 

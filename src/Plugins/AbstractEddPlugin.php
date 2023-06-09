@@ -40,28 +40,28 @@ abstract class AbstractEddPlugin extends AbstractPlugin {
 
 			throw new UnexpectedValueException( sprintf(
 				'Could not query API for package %s. Please try again later.' . $details,
-				'junaidbhura/' . $this->slug
+				$this->getPackageName()
 			) );
 		}
 
 		if ( ! is_array( $response ) ) {
 			throw new UnexpectedValueException( sprintf(
 				'Expected a JSON object from API for package %s',
-				'junaidbhura/' . $this->slug
+				$this->getPackageName()
 			) );
 		}
 
 		if ( empty( $response['download_link'] ) || ! is_string( $response['download_link'] ) ) {
 			throw new UnexpectedValueException( sprintf(
 				'Expected a valid download URL from API for package %s',
-				'junaidbhura/' . $this->slug
+				$this->getPackageName()
 			) );
 		}
 
 		if ( empty( $response['new_version'] ) || ! is_scalar( $response['new_version'] ) ) {
 			throw new UnexpectedValueException( sprintf(
 				'Expected a valid download version number from API for package %s',
-				'junaidbhura/' . $this->slug
+				$this->getPackageName()
 			) );
 		}
 
@@ -71,7 +71,7 @@ abstract class AbstractEddPlugin extends AbstractPlugin {
 				'Expected download version from API (%s) to match installed version (%s) of package %s',
 				$response['new_version'],
 				$this->version,
-				'junaidbhura/' . $this->slug
+				$this->getPackageName()
 			) );
 		}
 

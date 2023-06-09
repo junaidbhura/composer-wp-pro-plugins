@@ -54,7 +54,7 @@ class Wpml extends AbstractPlugin {
 		if ( ! array_key_exists( $this->slug, $packages ) ) {
 			throw new InvalidArgumentException( sprintf(
 				'Could not find a matching package for %s. Check the package spelling and that the package is supported',
-				'junaidbhura/' . $this->slug
+				$this->getPackageName()
 			) );
 		}
 

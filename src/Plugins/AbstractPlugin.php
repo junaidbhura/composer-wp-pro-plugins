@@ -44,4 +44,13 @@ abstract class AbstractPlugin {
 	 */
 	abstract public function getDownloadUrl();
 
+	/**
+	 * Get the plugin's Composer package name with vendor.
+	 *
+	 * @return string
+	 */
+	protected function getPackageName() {
+		return 'junaidbhura/' . $this->slug;
+	}
+
 }

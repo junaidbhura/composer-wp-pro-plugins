@@ -53,21 +53,21 @@ class GravityForms extends AbstractPlugin {
 
 			throw new UnexpectedValueException( sprintf(
 				'Could not query API for package %s. Please try again later.' . $details,
-				'junaidbhura/' . $this->slug
+				$this->getPackageName()
 			) );
 		}
 
 		if ( ! is_array( $response ) ) {
 			throw new UnexpectedValueException( sprintf(
 				'Expected a serialized object from API for package %s',
-				'junaidbhura/' . $this->slug
+				$this->getPackageName()
 			) );
 		}
 
 		if ( empty( $response['download_url_latest'] ) || ! is_string( $response['download_url_latest'] ) ) {
 			throw new UnexpectedValueException( sprintf(
 				'Expected a valid download URL for package %s',
-				'junaidbhura/' . $this->slug
+				$this->getPackageName()
 			) );
 		}
 
