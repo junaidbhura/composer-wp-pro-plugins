@@ -58,12 +58,16 @@ class Wpml extends AbstractPlugin {
 			) );
 		}
 
-		return 'https://wpml.org/?' . http_build_query( array(
+		$api_query = array(
 			'download'         => $packages[ $this->slug ],
 			'user_id'          => getenv( 'WPML_USER_ID' ),
 			'subscription_key' => getenv( 'WPML_KEY' ),
 			'version'          => $this->version,
-		), '', '&' );
+		);
+
+		$api_url = 'https://wpml.org/';
+
+		return $api_url . '?' . http_build_query( $api_query, '', '&' );
 	}
 
 }

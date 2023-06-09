@@ -313,13 +313,17 @@ class NinjaForms extends AbstractEddPlugin {
 
 		$http = new Http();
 
-		return $http->get( 'https://ninjaforms.com', array(
+		$api_query = array(
 			'edd_action' => 'get_version',
 			'license'    => $license,
 			'item_name'  => $name,
 			'url'        => $url,
 			'version'    => $this->version,
-		) );
+		);
+
+		$api_url = 'https://ninjaforms.com';
+
+		return $http->get( $api_url, $api_query );
 	}
 
 }

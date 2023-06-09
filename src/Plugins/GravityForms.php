@@ -35,12 +35,16 @@ class GravityForms extends AbstractPlugin {
 	public function getDownloadUrl() {
 		$http = new Http();
 
+		$api_query = array(
+			'op'   => 'get_plugin',
+			'slug' => $this->slug,
+			'key'  => getenv( 'GRAVITY_FORMS_KEY' ),
+		);
+
+		$api_url = 'https://gravityapi.com/wp-content/plugins/gravitymanager/api.php';
+
 		try {
-			$response = unserialize( $http->get( 'https://gravityapi.com/wp-content/plugins/gravitymanager/api.php', array(
-				'op'   => 'get_plugin',
-				'slug' => $this->slug,
-				'key'  => getenv( 'GRAVITY_FORMS_KEY' ),
-			) ) );
+			$response = unserialize( $http->get( $api_url, $api_query ) );
 		} catch ( RuntimeException $e ) {
 			$details = $e->getMessage();
 			if ( $details ) {

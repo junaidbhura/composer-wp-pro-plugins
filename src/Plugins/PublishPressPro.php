@@ -106,13 +106,17 @@ class PublishPressPro extends AbstractEddPlugin {
 
 		$http = new Http();
 
-		return $http->get( 'https://publishpress.com', array(
+		$api_query = array(
 			'edd_action' => 'get_version',
 			'license'    => $license,
 			'item_id'    => $id,
 			'url'        => $url,
 			'version'    => $this->version,
-		) );
+		);
+
+		$api_url = 'https://publishpress.com';
+
+		return $http->get( $api_url, $api_query );
 	}
 
 }

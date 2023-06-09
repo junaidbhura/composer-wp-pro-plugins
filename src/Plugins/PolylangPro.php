@@ -22,13 +22,17 @@ class PolylangPro extends AbstractEddPlugin {
 	protected function getDownloadUrlFromApi() {
 		$http = new Http();
 
-		return $http->get( 'https://polylang.pro', array(
+		$api_query = array(
 			'edd_action' => 'get_version',
 			'license'    => getenv( 'POLYLANG_PRO_KEY' ),
 			'item_name'  => 'Polylang Pro',
 			'url'        => getenv( 'POLYLANG_PRO_URL' ),
 			'version'    => $this->version,
-		) );
+		);
+
+		$api_url = 'https://polylang.pro';
+
+		return $http->get( $api_url, $api_query );
 	}
 
 }
