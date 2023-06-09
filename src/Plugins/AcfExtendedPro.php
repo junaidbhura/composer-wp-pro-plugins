@@ -27,8 +27,12 @@ class AcfExtendedPro extends AbstractEddPlugin {
 			'license'    => getenv( 'ACFE_PRO_KEY' ),
 			'item_name'  => 'ACF Extended Pro',
 			'url'        => getenv( 'ACFE_PRO_URL' ),
-			'version'    => $this->version,
 		);
+
+		// If no version is specified, we are fetching the latest version.
+		if ( $this->version ) {
+			$api_query['version'] = $this->version;
+		}
 
 		$api_url = 'https://acf-extended.com';
 

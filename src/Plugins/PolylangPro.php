@@ -27,8 +27,12 @@ class PolylangPro extends AbstractEddPlugin {
 			'license'    => getenv( 'POLYLANG_PRO_KEY' ),
 			'item_name'  => 'Polylang Pro',
 			'url'        => getenv( 'POLYLANG_PRO_URL' ),
-			'version'    => $this->version,
 		);
+
+		// If no version is specified, we are fetching the latest version.
+		if ( $this->version ) {
+			$api_query['version'] = $this->version;
+		}
 
 		$api_url = 'https://polylang.pro';
 

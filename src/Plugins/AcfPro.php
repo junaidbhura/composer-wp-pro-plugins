@@ -22,8 +22,12 @@ class AcfPro extends AbstractPlugin {
 			'p' => 'pro',
 			'a' => 'download',
 			'k' => getenv( 'ACF_PRO_KEY' ),
-			't' => $this->version,
 		);
+
+		// If no version is specified, we are fetching the latest version.
+		if ( $this->version ) {
+			$api_query['t'] = $this->version;
+		}
 
 		$api_url = 'https://connect.advancedcustomfields.com/index.php';
 

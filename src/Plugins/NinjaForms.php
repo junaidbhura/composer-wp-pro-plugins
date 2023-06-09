@@ -318,8 +318,12 @@ class NinjaForms extends AbstractEddPlugin {
 			'license'    => $license,
 			'item_name'  => $name,
 			'url'        => $url,
-			'version'    => $this->version,
 		);
+
+		// If no version is specified, we are fetching the latest version.
+		if ( $this->version ) {
+			$api_query['version'] = $this->version;
+		}
 
 		$api_url = 'https://ninjaforms.com';
 

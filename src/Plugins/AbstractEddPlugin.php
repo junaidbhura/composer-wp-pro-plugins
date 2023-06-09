@@ -65,7 +65,8 @@ abstract class AbstractEddPlugin extends AbstractPlugin {
 			) );
 		}
 
-		if ( ! Semver::satisfies( $response['new_version'], $this->version ) ) {
+		// If no version is specified, we are fetching the latest version.
+		if ( $this->version && ! Semver::satisfies( $response['new_version'], $this->version ) ) {
 			throw new UnexpectedValueException( sprintf(
 				'Expected download version from API (%s) to match installed version (%s) of package %s',
 				$response['new_version'],
