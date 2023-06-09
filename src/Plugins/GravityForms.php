@@ -7,8 +7,8 @@
 
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
+use Exception;
 use Junaidbhura\Composer\WPProPlugins\Http;
-use RuntimeException;
 use UnexpectedValueException;
 
 /**
@@ -45,7 +45,7 @@ class GravityForms extends AbstractPlugin {
 
 		try {
 			$response = unserialize( $http->get( $api_url, $api_query ) );
-		} catch ( RuntimeException $e ) {
+		} catch ( Exception $e ) {
 			$details = $e->getMessage();
 			if ( $details ) {
 				$details = PHP_EOL . $details;

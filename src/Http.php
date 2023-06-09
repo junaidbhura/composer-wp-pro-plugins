@@ -24,9 +24,6 @@ class Http {
 	public function post( $url, $args = array() ) {
 		$curl_handle = curl_init();
 		curl_setopt( $curl_handle, CURLOPT_URL, $url );
-		curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true );
-		curl_setopt( $curl_handle, CURLOPT_FOLLOWLOCATION, true );
-		curl_setopt( $curl_handle, CURLOPT_FAILONERROR, true );
 		curl_setopt( $curl_handle, CURLOPT_SSL_VERIFYPEER, false );
 		curl_setopt( $curl_handle, CURLOPT_SSL_VERIFYHOST, false );
 		curl_setopt( $curl_handle, CURLOPT_CUSTOMREQUEST, 'POST' );
@@ -51,9 +48,6 @@ class Http {
 
 		$curl_handle = curl_init();
 		curl_setopt( $curl_handle, CURLOPT_URL, $url );
-		curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true );
-		curl_setopt( $curl_handle, CURLOPT_FOLLOWLOCATION, true );
-		curl_setopt( $curl_handle, CURLOPT_FAILONERROR, true );
 
 		return $this->request( $curl_handle );
 	}
@@ -61,10 +55,15 @@ class Http {
 	/**
 	 * @param  \CurlHandle|resource $curl_handle The cURL handler.
 	 * @throws RuntimeException If the request failed or the response is invalid.
-	 * @return string
+	 * @return string The response body.
 	 */
 	protected function request( $curl_handle ) {
+		curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true );
+		curl_setopt( $curl_handle, CURLOPT_FOLLOWLOCATION, true );
+		curl_setopt( $curl_handle, CURLOPT_FAILONERROR, true );
+
 		$response = curl_exec( $curl_handle );
+
 		$curl_errno = curl_errno( $curl_handle );
 		$curl_error = curl_error( $curl_handle );
 		curl_close( $curl_handle );

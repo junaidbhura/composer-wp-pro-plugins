@@ -8,7 +8,7 @@
 namespace Junaidbhura\Composer\WPProPlugins\Plugins;
 
 use Composer\Semver\Semver;
-use RuntimeException;
+use Exception;
 use UnexpectedValueException;
 
 /**
@@ -32,7 +32,7 @@ abstract class AbstractEddPlugin extends AbstractPlugin {
 	public function getDownloadUrl() {
 		try {
 			$response = json_decode( $this->getDownloadUrlFromApi(), true );
-		} catch ( RuntimeException $e ) {
+		} catch ( Exception $e ) {
 			$details = $e->getMessage();
 			if ( $details ) {
 				$details = PHP_EOL . $details;
