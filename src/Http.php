@@ -21,7 +21,7 @@ class Http {
 	 * @param  array<string, mixed>  $args Arguments to POST.
 	 * @return string
 	 */
-	public function post( $url = '', $args = array() ) {
+	public function post( $url, $args = array() ) {
 		$curl_handle = curl_init();
 		curl_setopt( $curl_handle, CURLOPT_URL, $url );
 		curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true );
@@ -44,7 +44,7 @@ class Http {
 	 * @param  array<string, mixed>  $args Arguments to add to request.
 	 * @return string
 	 */
-	public function get( $url = '', $args = array() ) {
+	public function get( $url, $args = array() ) {
 		if ( ! empty( $args ) ) {
 			$url .= '?' . http_build_query( $args, '', '&' );
 		}
